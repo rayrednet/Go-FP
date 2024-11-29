@@ -4,23 +4,36 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-final-project/config"
+	"go-final-project/controllers"
 	"go-final-project/models"
-
+	
 )
 
 func main() {
+
 	db := config.GetDB()
 
+	
 	err := db.AutoMigrate(&models.Category{})
 	if err != nil {
 		panic("Failed to migrate database: " + err.Error())
 	}
 	fmt.Println("Database migrated successfully!")
 
+	
+
 	r := gin.Default()
 
-
 	r.LoadHTMLGlob("templates/*")
+
+
+	r.GET("/categories", controllers.GetCategories)
+	r.GET("/categories/create", controllers.NewCategory)
+	r.POST("/categories", controllers.CreateCategory)
+	//r.GET("/categories/:id/edit", controllers.EditCategory)
+	//r.POST("/categories/:id/update", controllers.UpdateCategory)
+	//r.POST("/categories/:id/delete", controllers.DeleteCategory)
+
 
 
 	r.GET("/", func(c *gin.Context) {

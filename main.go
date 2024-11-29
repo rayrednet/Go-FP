@@ -30,9 +30,9 @@ func main() {
 	r.GET("/categories", controllers.GetCategories)
 	r.GET("/categories/create", controllers.NewCategory)
 	r.POST("/categories", controllers.CreateCategory)
-	//r.GET("/categories/:id/edit", controllers.EditCategory)
-	//r.POST("/categories/:id/update", controllers.UpdateCategory)
-	//r.POST("/categories/:id/delete", controllers.DeleteCategory)
+	r.GET("/categories/:id/edit", controllers.EditCategory)
+	r.POST("/categories/:id/update", controllers.UpdateCategory)
+	r.POST("/categories/:id/delete", controllers.DeleteCategory)
 
 
 

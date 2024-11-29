@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Scarlett's Café</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f1e7;
+            font-family: 'Poppins', sans-serif;
+            color: #4e3b31;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #f8c6d2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1rem; /* Mengurangi padding vertikal */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem; /* Mengurangi ukuran font */
+            font-weight: 600;
+            color: #4e3b31;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .nav-link {
+            color: #4e3b31;
+            font-weight: 500;
+            font-size: 0.9rem; /* Mengurangi ukuran font */
+            padding: 0.5rem 0.75rem; /* Mengurangi padding */
+        }
+
+        .nav-link:hover {
+            color: #d07852;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Quicksand', sans-serif;
+            color: #4e3b31;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-top: 6px solid #f8c6d2;
+        }
+
+        .card h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4e3b31;
+            margin-bottom: 1rem;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .table th {
+            background-color: #f6c8d2;
+            color: white;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .table td {
+            background-color: #f9f1e7;
+            color: #4e3b31;
+            padding: 0.75rem;
+            border: none;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #fef5e5;
+        }
+
+        .btn-back {
+            background-color: #b0e0e6;
+            color: #ffffff;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back:hover {
+            background-color: #9ad1d1;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            background-color: #f8c6d2;
+            padding: 1.5rem 0;
+            text-align: center;
+            color: #4e3b31;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #4e3b31;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #d07852;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Scarlett's Café</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categories">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/baristas">Barista</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="card">
+        <h1>{{.product.Name}}</h1>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Category</th>
+                    <td>{{.product.Category.Name}}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>${{.product.Price}}</td>
+                </tr>
+                <tr>
+                    <th>Rating</th>
+                    <td>{{.product.Rating}}/5</td>
+                </tr>
+                <tr>
+                    <th>Available Hours</th>
+                    <td>{{.product.AvailableHour}}</td>
+                </tr>
+                <tr>
+                    <th>Stock</th>
+                    <td>{{.product.Stock}}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{.product.Description}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/products" class="btn-back">Back to Product List</a>
+    </div>
+</div>
+<footer>
+    <p>© 2024 Scarlett's Café | Crafted with ❤️ and ☕</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

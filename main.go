@@ -14,7 +14,7 @@ func main() {
 	db := config.GetDB()
 
 	
-	err := db.AutoMigrate(&models.Category{})
+	err := db.AutoMigrate(&models.Category{}, &models.Product{})
 	if err != nil {
 		panic("Failed to migrate database: " + err.Error())
 	}
@@ -34,6 +34,14 @@ func main() {
 	r.POST("/categories/:id/update", controllers.UpdateCategory)
 	r.POST("/categories/:id/delete", controllers.DeleteCategory)
 
+	
+	r.GET("/products", controllers.GetProducts)             
+	r.GET("/products/create", controllers.NewProduct)        
+	r.POST("/products", controllers.CreateProduct)          
+	r.GET("/products/:id/edit", controllers.EditProduct)     
+	r.POST("/products/:id/update", controllers.UpdateProduct) 
+	r.POST("/products/:id/delete", controllers.DeleteProduct) 
+	r.GET("/products/:id", controllers.ShowProduct)         
 
 
 	r.GET("/", func(c *gin.Context) {

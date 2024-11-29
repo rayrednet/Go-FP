@@ -6,6 +6,7 @@ import (
 	"go-final-project/config"
 	"go-final-project/controllers"
 	"go-final-project/models"
+	"go-final-project/seeders"
 	
 )
 
@@ -20,7 +21,7 @@ func main() {
 	}
 	fmt.Println("Database migrated successfully!")
 
-	
+	seeders.SeedDatabase(db)
 
 	r := gin.Default()
 

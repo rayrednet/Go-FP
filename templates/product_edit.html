@@ -155,7 +155,7 @@
 <h1 class="text-center mb-4">Edit Scarlett's Menu</h1>
 <form action="/products/{{ .product.ID }}/update" method="POST">
     <div>
-        <label for="name">Product Name:</label>
+        <label for="name">Menu Name:</label>
         <input type="text" id="name" name="name" value="{{ .product.Name }}" required>
     </div>
 
@@ -195,13 +195,13 @@
     </div>
 
     <div class="text-center">
-        <button type="submit">Update Product</button>
+        <button type="submit">Update Menu</button>
     </div>
 </form>
 
 <!-- Back Link -->
 <div class="text-center mt-4 back-link">
-    <a href="/products" class="btn btn-link" style="background-color: #a5d6e1; color: #fff; padding: 8px 20px; border-radius: 5px;">Back to Product List</a>
+    <a href="/products" class="btn btn-link" style="background-color: #a5d6e1; color: #fff; padding: 8px 20px; border-radius: 5px;">Back to Menu List</a>
 </div>
 
 <footer>

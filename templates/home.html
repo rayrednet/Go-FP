@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scarlett's Café</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f1e7; /* Pastel cream */
+      font-family: 'Poppins', sans-serif;
+      color: #4e3b31; /* Warm brown for text */
+    }
+
+    .navbar {
+      background-color: #f8c6d2; /* Soft baby pink */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4e3b31;
+    }
+
+    .nav-link {
+      color: #4e3b31;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: #d07852; /* Soft brown-orange */
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fbc1d4, #fcb79a); /* Gradient from soft pink to light orange */
+      color: #fff;
+      border-radius: 15px;
+      padding: 4rem;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-pastel {
+      background-color: #f8c6d2; /* Soft baby pink */
+      color: white;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-pastel:hover {
+      background-color: #e0978a;
+      color: white;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      background: #fffaf5; /* Soft off-white */
+    }
+
+    .card img {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .card-title {
+      font-weight: bold;
+      color: #4e3b31;
+    }
+
+    footer {
+      background-color: #f8c6d2; /* Soft baby pink */
+      padding: 2rem 0;
+      text-align: center;
+      color: #4e3b31;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    footer a {
+      color: #4e3b31;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      color: #d07852;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/">Scarlett's Café</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/products">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Category</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/baristas">Barista</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="container mt-5">
+  <div class="hero">
+    <h1>Welcome to Scarlett's Café</h1>
+    <p>Discover the beauty of every brew ☕</p>
+    <a href="/products" class="btn btn-pastel">Explore Menu</a>
+  </div>
+</div>
+
+<!-- Featured Menu -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4" style="color: #4e3b31;">Featured Menu</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://img.freepik.com/premium-photo/grilled-cheese_908985-49326.jpg" class="card-img-top" alt="Grilled Sandwich">
+        <div class="card-body">
+          <h5 class="card-title text-center">Grilled Sandwich</h5>
+          <p class="text-center">Crispy golden crust and cheesy perfection.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://img.freepik.com/premium-photo/coffee-hd-image_597327-1369.jpg" class="card-img-top" alt="Espresso">
+        <div class="card-body">
+          <h5 class="card-title text-center">Espresso</h5>
+          <p class="text-center">Bold and rich, crafted for coffee lovers.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://img.pikbest.com/origin/09/32/38/764pIkbEsTdpy.jpg!w700wp" class="card-img-top" alt="Chocolate Cake">
+        <div class="card-body">
+          <h5 class="card-title text-center">Chocolate Cake</h5>
+          <p class="text-center">A decadent treat for sweet cravings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2024 Scarlett's Café | Crafted with ❤️ and ☕</p>
+  <p><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

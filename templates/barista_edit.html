@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Barista - Scarlett's Cafe</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f1e7;
+            font-family: 'Poppins', sans-serif;
+            color: #4e3b31;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #f8c6d2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4e3b31;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            color: #4e3b31;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #4e3b31;
+        }
+
+        .btn {
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background-color: #4e9f9a;
+            border-color: #4e9f9a;
+        }
+
+        .btn-primary:hover {
+            background-color: #3c8c87;
+            border-color: #3c8c87;
+        }
+
+        .btn-secondary {
+            background-color: #f8c6d2;
+            border-color: #f8c6d2;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e3adb8;
+            border-color: #e3adb8;
+        }
+
+        footer {
+            background-color: #f8c6d2;
+            padding: 1.5rem 0;
+            text-align: center;
+            color: #4e3b31;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #4e3b31;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #d07852;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+{{ template "navbar" . }}
+
+<!-- Edit Barista Form -->
+<div class="container mt-5">
+    <h1>Edit Barista</h1>
+    {{if .error}}
+    <div class="alert alert-danger">
+        {{.error}}
+    </div>
+    {{end}}
+    <form action="/baristas/{{.barista.ID}}/update" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="Name" value="{{.barista.Name}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="experience" class="form-label">Experience (Years)</label>
+            <input type="number" class="form-control" id="experience" name="Experience" value="{{.barista.Experience}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="number" step="0.1" class="form-control" id="rating" name="Rating" value="{{printf "%.1f" .barista.Rating}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="profile_pic" class="form-label">Profile Picture</label>
+            <input type="file" class="form-control" id="profile_pic" name="ProfilePic">
+            <small class="form-text text-muted">Leave empty if you don't want to update the profile picture.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Barista</button>
+        <a href="/baristas" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Footer -->
+{{ template "footer" . }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

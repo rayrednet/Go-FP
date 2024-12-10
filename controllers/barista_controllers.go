@@ -50,3 +50,82 @@ func (bc *BaristaController) DeleteBarista(c *gin.Context) {
 	// Redirect back to the baristas list
 	c.Redirect(http.StatusFound, "/baristas")
 }
+
+// EditBarista renders the edit form for a specific barista
+func (bc *BaristaController) EditBarista(c *gin.Context) {
+	id := c.Param("id")
+	var barista models.Barista
+
+	// Find the barista by ID
+	if err := bc.DB.First(&barista, id).Error; err != nil {
+		c.HTML(http.StatusNotFound, "error.html", gin.H{
+			"error": "Barista not found",
+		})
+		return
+	}
+
+	// Render the edit form with the barista data
+	c.HTML(http.StatusOK, "barista_edit.html", gin.H{
+		"barista": barista,
+	})
+}
+
+// UpdateBarista updates a specific barista's details
+func (bc *BaristaController) UpdateBarista(c *gin.Context) {
+	id := c.Param("id")
+	var barista models.Barista
+
+	// Find the barista by ID
+	if err := bc.DB.First(&barista, id).Error; err != nil {
+		c.HTML(http.StatusNotFound, "error.html", gin.H{
+			"error": "Barista not found",
+		})
+		return
+	}
+
+	// Parse form data without overwriting the existing object
+	var form struct {
+		Name       string `form:"Name"`
+		Experience int    `form:"Experience"`
+		Rating     float64 `form:"Rating"`
+	}
+
+	if err := c.ShouldBind(&form); err != nil {
+		c.HTML(http.StatusBadRequest, "barista_edit.html", gin.H{
+			"error": "Invalid form data",
+			"barista": barista,
+		})
+		return
+	}
+
+	// Update fields only if present in the form
+	barista.Name = form.Name
+	barista.Experience = form.Experience
+	barista.Rating = form.Rating
+
+	// Handle profile picture update
+	file, err := c.FormFile("ProfilePic")
+	if err == nil { // If a new file is uploaded
+		// Save the new file
+		filePath := "./static/uploads/" + file.Filename
+		if saveErr := c.SaveUploadedFile(file, filePath); saveErr != nil {
+			c.HTML(http.StatusInternalServerError, "error.html", gin.H{
+				"error": "Failed to save profile picture",
+			})
+			return
+		}
+		// Update the ProfilePic field
+		barista.ProfilePic = "/static/uploads/" + file.Filename
+	}
+
+	// Save updated barista to the database
+	if err := bc.DB.Save(&barista).Error; err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", gin.H{
+			"error": "Failed to update barista",
+		})
+		return
+	}
+
+	// Redirect to the barista list page
+	c.Redirect(http.StatusFound, "/baristas")
+}

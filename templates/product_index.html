@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scarlett's Cafe</title>
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <title>Menus - Scarlett's Cafe</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Aesthetic Fonts from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
@@ -163,120 +166,13 @@
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-        <a class="navbar-brand" href="/">Scarlett's Café</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/categories">Category</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/baristas">Barista</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/reviews">Review</a>
-              </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+{{ template "navbar" . }}
+
 <!-- Header -->
 <div class="header">
     <h1>Scarlett's Menu</h1>
 </div>
-<!-- Carousel -->
-<div id="menuCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <!-- New Croissant -->
-      <div class="carousel-item active">
-        <img src="https://img.freepik.com/premium-photo/collection-croissants-bakery-items_976492-120801.jpg" class="d-block w-100" alt="Croissant">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Fresh Croissant</h5>
-          <p>Flaky and buttery, perfect for breakfast or a light snack.</p>
-        </div>
-      </div>
-      <!-- Matcha Latte -->
-      <div class="carousel-item">
-        <img src="https://img.freepik.com/premium-photo/japan-s-traditional-drink-matcha-tea-glass_535844-3012.jpg?w=360" class="d-block w-100" alt="Matcha Latte">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Matcha Latte</h5>
-          <p>A creamy blend of matcha and steamed milk.</p>
-        </div>
-      </div>
-      <!-- Fish and Chips -->
-      <div class="carousel-item">
-        <img src="https://img.freepik.com/premium-photo/closeup-chips-fish-generative-ai_345906-115.jpg" class="d-block w-100" alt="Fish and Chips">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Fish and Chips</h5>
-          <p>Crispy battered fish served with golden fries.</p>
-        </div>
-      </div>
-      <!-- Fresh Salad -->
-      <div class="carousel-item">
-        <img src="https://img.freepik.com/free-photo/fresh-salad-wooden-bowl-lunch-generative-ai_188544-8120.jpg" class="d-block w-100" alt="Fresh Salad">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Fresh Salad</h5>
-          <p>A healthy mix of fresh greens with a tangy dressing.</p>
-        </div>
-      </div>
-      <!-- New Caramel Latte -->
-      <div class="carousel-item">
-        <img src="https://img.freepik.com/premium-photo/arrangement-with-cup-coffee-wooden-background_926199-375292.jpg" class="d-block w-100" alt="Caramel Latte">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Caramel Latte</h5>
-          <p>A smooth blend of espresso, steamed milk, and rich caramel syrup.</p>
-        </div>
-      </div>
-      <!-- New Grilled Steak -->
-      <div class="carousel-item">
-        <img src="https://img.freepik.com/premium-photo/grilled-steak_148840-65657.jpg" class="d-block w-100" alt="Grilled Steak">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Grilled Steak</h5>
-          <p>Juicy, tender steak served with a side of crispy potatoes.</p>
-        </div>
-      </div>
-      
-      <!-- New Cappuccino -->
-      <div class="carousel-item">
-        <img src="https://img.freepik.com/premium-photo/cappuccino-coffee-hd-8k-wallpaper-stock-photographic-image_871881-10710.jpg" class="d-block w-100" alt="Cappuccino">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Cappuccino</h5>
-          <p>Espresso topped with steamed milk and a layer of foamy milk foam.</p>
-        </div>
-      </div>
-      <!-- New Avocado Toast -->
-      <div class="carousel-item">
-        <img src="https://data.moonscdn.com/prompt/slices/1/watermarked/food-artistry-avocado-toast_oemyT.png" class="d-block w-100" alt="Avocado Toast">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Avocado Toast</h5>
-          <p>Fresh avocado spread on crispy toast, with a sprinkle of seasoning.</p>
-        </div>
-      </div>
-      <!-- New Chocolate Cake -->
-      <div class="carousel-item">
-        <img src="https://cdn.pixabay.com/photo/2024/03/05/06/25/ai-generated-8613875_1280.jpg" class="d-block w-100" alt="Chocolate Cake">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Chocolate Cake</h5>
-          <p>Rich and decadent, with a creamy chocolate frosting.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-</div>
+
 <!-- Add New Menu Button -->
 <div class="text-center">
   <a href="/products/create" class="btn btn-add">Add New Menu</a>
@@ -316,10 +212,8 @@
     </tbody>
 </table>
 <!-- Footer -->
-<footer>
-    <p>© 2024 Scarlett's Café | Crafted with ❤️ and ☕</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
-  </footer>
+{{ template "footer" . }}
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

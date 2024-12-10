@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-final-project/config"
 	"go-final-project/controllers"
 )
 
@@ -25,6 +26,11 @@ func RegisterRoutes(r *gin.Engine) {
 	r.POST("/products/:id/update", controllers.UpdateProduct)
 	r.POST("/products/:id/delete", controllers.DeleteProduct)
 	r.GET("/products/:id", controllers.ShowProduct)
+
+	// Barista routes
+	db := config.GetDB()
+	baristaController := controllers.NewBaristaController(db)
+	r.GET("/baristas", baristaController.GetAllBaristas)
 
 	// Review routes
 	r.GET("/reviews", controllers.GetReviews)

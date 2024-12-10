@@ -2,12 +2,14 @@ package config
 
 import (
 	"fmt"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+
+	"go-final-project/models"
 )
 
 var DB *gorm.DB
@@ -38,6 +40,19 @@ func GetDB() *gorm.DB {
 		}
 
 		fmt.Println("Connected to the database successfully")
+
+		// Run migrations
+		err = DB.AutoMigrate(
+			&models.Barista{},
+			&models.Category{},
+			&models.Product{},
+			&models.Review{},
+		)
+		if err != nil {
+			log.Fatalf("Error during migration: %v", err)
+		}
+		fmt.Println("Database migration completed")
 	}
+
 	return DB
 }

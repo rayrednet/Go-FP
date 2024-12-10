@@ -15,6 +15,9 @@ func SeedDatabase(db *gorm.DB) {
 	seedCategories(db)
 	seedProducts(db)
 	seedReviews(db)
+	SeedBaristas(db)
+
+	log.Println("Database seeding completed!")
 }
 
 func seedCategories(db *gorm.DB) {
@@ -127,4 +130,28 @@ func seedReviews(db *gorm.DB) {
 		}
 	}
 	log.Println("Reviews seeded successfully!")
+}
+
+func SeedBaristas(db *gorm.DB) {
+	rand.Seed(time.Now().UnixNano())
+
+	baristaNames := []string{
+		"John Doe", "Jane Smith", "Emily Davis", "Michael Brown", "Sophia Wilson",
+		"James Johnson", "Olivia Taylor", "William Martinez", "Charlotte Anderson", "Benjamin Thomas",
+		"Amelia White", "Alexander Harris", "Mia Clark", "Ethan Lewis", "Harper Robinson",
+	}
+
+	for i := 0; i < 20; i++ {
+		barista := models.Barista{
+			Name:       baristaNames[rand.Intn(len(baristaNames))],
+			Experience: rand.Intn(11), // Random years of experience (0–10 years)
+			ProfilePic: fmt.Sprintf("https://picsum.photos/seed/%d/200/200", rand.Intn(1000)), // Random image from Picsum
+			Rating:     math.Round((rand.Float64()*4+1)*100) / 100, // Rating between 1.0 and 5.0
+		}
+
+		if err := db.Create(&barista).Error; err != nil {
+			log.Printf("Failed to seed barista %s: %v", barista.Name, err)
+		}
+	}
+	log.Println("Baristas seeded successfully!")
 }

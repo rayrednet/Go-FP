@@ -1,9 +1,15 @@
-| Name           | NRP        | Kelas     |
-| ---            | ---        | ----------|
-| Helsa Sriprameswari Putri | 5025221154 | PBKK (D) |
-| |  | |
+# 🌟 Final Project Go - Scralett's Cafe
 
-# Final Project Go - Scralett's Cafe
+## 📝 Group Information
+- *Group Number:* 9
+- *Class:* Pemrograman Berbasis Kerangka Kerja (D)
+
+## 👥 Group Members
+
+| Name                       | NRP         |
+|----------------------------|-------------|
+| Helsa Sriprameswari Putri  | 5025221154  |
+| Rayssa Ravelia             | 5025211219  |
 
 ## Tech Stack
 1. Language: GoLang

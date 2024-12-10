@@ -194,3 +194,30 @@ footer a:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
   
+  /* Mouse hover effect */
+  .sparkle {
+    position: absolute;
+    width: 3px; /* Smaller size */
+    height: 3px; /* Smaller size */
+    background-color: rgba(255, 223, 128, 0.8); /* Soft golden glow */
+    border-radius: 50%;
+    pointer-events: none; /* Prevent interaction */
+    animation: fairy-sparkle-animation 0.8s ease-out forwards;
+    box-shadow: 0 0 6px rgba(255, 223, 128, 0.7), 0 0 12px rgba(255, 165, 0, 0.5);
+  }
+  
+  @keyframes fairy-sparkle-animation {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  

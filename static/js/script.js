@@ -39,3 +39,32 @@ window.addEventListener("click", function (e) {
     contactPopup.style.display = "none";
   }
 });
+
+
+document.addEventListener('mousemove', function (e) {
+    // Function to create a single sparkle
+    const createSparkle = (x, y) => {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+  
+      // Slightly randomize size and position for a subtle effect
+      sparkle.style.transform = `translate(${Math.random() * 6 - 3}px, ${
+        Math.random() * 6 - 3
+      }px) scale(${Math.random() * 0.5 + 0.5})`;
+  
+      document.body.appendChild(sparkle);
+  
+      // Remove the sparkle after animation ends
+      sparkle.addEventListener('animationend', function () {
+        sparkle.remove();
+      });
+    };
+  
+    // Generate fewer sparkles near the cursor
+    for (let i = 0; i < 3; i++) { // Reduced to 3 sparkles
+      createSparkle(e.pageX, e.pageY);
+    }
+  });
+  

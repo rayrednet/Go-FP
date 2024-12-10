@@ -49,7 +49,9 @@ After this, you should see your project running on http://localhost:8080/
 4. User can add categories for the menu.
 5. User can update an existing category.
 6. User can delete a category.
+7. User can view and add a new review
 
+# Table Structures
 
 ## Overview
 
@@ -79,3 +81,12 @@ After this, you should see your project running on http://localhost:8080/
 
 ## Delete Category
 ![image](https://github.com/user-attachments/assets/4367dad3-98a6-446d-881f-cd923c7f782d)
+
+## Review Page
+
+
+![image](https://github.com/user-attachments/assets/ba128f6b-bf12-464e-9c4e-cb7a3d91529a)
+
+## Add Review
+
+![image](https://github.com/user-attachments/assets/f01bc9d6-4938-4798-81f0-1321a1a350e0)

@@ -46,6 +46,7 @@
             font-family: 'Quicksand', sans-serif;
             color: #4e3b31;
             margin-bottom: 0.5rem;
+            margin-top : 1 rem;
         }
         .reviews-list {
             list-style: none; /* Remove list bullets */
@@ -76,6 +77,11 @@
             color: #4e3b31;
         }
         .reviews-list li .review {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .reviews-list li .rating {
             color: #555;
             font-size: 0.95rem;
         }
@@ -137,6 +143,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/baristas">Barista</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reviews">Review</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -151,8 +160,9 @@
         {{ range .reviews }}
         <li>
             <strong>{{ .CustName }}</strong> ({{ .CustEmail }})<br>
-            Product: <span class="product-name">{{ .Product.Name }}</span><br>
-            Review: <span class="review">{{ .Review }}</span>
+            Menu : <span class="product-name">{{ .Product.Name }}</span><br>
+            Review : <span class="review">{{ .Review }}</span><br>
+            Rating : <span class="rating">{{ .Product.Rating }}</span>
         </li>
         {{ end }}
     </ul>

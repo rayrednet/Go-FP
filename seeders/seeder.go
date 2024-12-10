@@ -14,6 +14,7 @@ import (
 func SeedDatabase(db *gorm.DB) {
 	seedCategories(db)
 	seedProducts(db)
+	seedReviews(db)
 }
 
 func seedCategories(db *gorm.DB) {
@@ -88,4 +89,42 @@ func seedProducts(db *gorm.DB) {
 		}
 	}
 	log.Println("Products seeded successfully!")
+}
+
+func seedReviews(db *gorm.DB) {
+	var products []models.Product
+	if err := db.Find(&products).Error; err != nil {
+		log.Fatalf("Failed to fetch products: %v", err)
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	customerNames := []string{
+		"John Doe", "Jane Smith", "Alex Johnson", "Chris Lee", "Emily Davis",
+	}
+	customerEmails := []string{
+		"johndoe@example.com", "janesmith@example.com", "alexjohnson@example.com", 
+		"chrislee@example.com", "emilydavis@example.com",
+	}
+	reviews := []string{
+		"Delicious! Highly recommend this dish.",
+		"The taste was amazing, will definitely order again.",
+		"Not what I expected, but still good.",
+		"Great flavor, but a bit too salty for my taste.",
+		"Absolutely loved it, one of the best meals I've had.",
+	}
+
+	// Loop to create 15 reviews
+	for i := 0; i < 15; i++ {
+		review := models.Review{
+			CustName:  customerNames[rand.Intn(len(customerNames))],
+			CustEmail: customerEmails[rand.Intn(len(customerEmails))],
+			Review:    reviews[rand.Intn(len(reviews))],
+			ProductID: products[rand.Intn(len(products))].ID,
+		}
+
+		if err := db.Create(&review).Error; err != nil {
+			log.Printf("Failed to seed review: %v", err)
+		}
+	}
+	log.Println("Reviews seeded successfully!")
 }

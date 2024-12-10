@@ -4,15 +4,29 @@
 <div class="hero text-center">
   <h1>Welcome to Scarlett's Café</h1>
   <p>Discover the beauty of every brew ☕</p>
-  <a href="/products" class="btn btn-primary">Explore Menu</a>
+  <a href="/products" class="btn explore-menu-btn">Explore Menu</a>
+</div>
+
+<div class="about-us mt-5">
+  <h2>✨About Us</h2>
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <img src="/static/images/cafe.jpg" alt="Scarlett's Café" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6">
+      <p class="text-center">
+        Scarlett's Café is your cozy escape from the everyday hustle. With handcrafted drinks, freshly baked treats, and a warm atmosphere, we bring people together to create cherished moments.
+      </p>
+    </div>
+  </div>
 </div>
 
 <div class="featured-menu mt-5">
-  <h2>Featured Menu</h2>
+  <h2>💖Our Best Menu</h2>
   <div class="row">
     <div class="col-md-4">
       <div class="card">
-        <img src="https://img.freepik.com/premium-photo/grilled-cheese_908985-49326.jpg" class="card-img-top" alt="Grilled Sandwich">
+        <img src="https://img.freepik.com/premium-photo/grilled-cheese_908985-49326.jpg" class="card-img-top card-image" alt="Grilled Sandwich">
         <div class="card-body">
           <h5 class="card-title text-center">Grilled Sandwich</h5>
           <p class="text-center">Crispy golden crust and cheesy perfection.</p>
@@ -21,7 +35,7 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-        <img src="https://img.freepik.com/premium-photo/coffee-hd-image_597327-1369.jpg" class="card-img-top" alt="Espresso">
+        <img src="https://img.freepik.com/premium-photo/coffee-hd-image_597327-1369.jpg" class="card-img-top card-image" alt="Espresso">
         <div class="card-body">
           <h5 class="card-title text-center">Espresso</h5>
           <p class="text-center">Bold and rich, crafted for coffee lovers.</p>
@@ -30,7 +44,7 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-        <img src="https://img.pikbest.com/origin/09/32/38/764pIkbEsTdpy.jpg!w700wp" class="card-img-top" alt="Chocolate Cake">
+        <img src="https://img.pikbest.com/origin/09/32/38/764pIkbEsTdpy.jpg!w700wp" class="card-img-top card-image" alt="Chocolate Cake">
         <div class="card-body">
           <h5 class="card-title text-center">Chocolate Cake</h5>
           <p class="text-center">A decadent treat for sweet cravings.</p>
@@ -39,4 +53,32 @@
     </div>
   </div>
 </div>
+
+<div class="cafe-location mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>📍 Find Us Here</h2>
+      <p class="description">
+        Scarlett's Café is located in the heart of the city, making it the perfect spot to unwind and relax. Whether you're looking for a cozy corner or a bustling meeting spot, we've got you covered.
+      </p>
+      <ul>
+        <li><strong>Address:</strong> 123 Coffee Lane, Downtown City</li>
+        <li><strong>Hours:</strong> Mon-Sun, 8 AM - 10 PM</li>
+        <li><strong>Phone:</strong> (123) 456-7890</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434508616!2d144.9537351153169!3d-37.8172099797517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43f1d92c1f%3A0xab2d7ebc2e79b766!2sScarlett&#39;s%20Cafe!5e0!3m2!1sen!2sus!4v1614729926618!5m2!1sen!2sus"
+        width="100%" 
+        height="300" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+
 {{ end }}

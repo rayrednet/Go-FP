@@ -194,6 +194,13 @@ footer a:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
   
+  .card-image {
+    width: 100%; /* Ensures the image takes the full width of the card */
+    height: 200px; /* Sets a fixed height for uniformity */
+    object-fit: cover; /* Ensures the image is cropped properly without distortion */
+    border-radius: 8px; /* Optional: Adds a slight border radius for aesthetics */
+  }
+  
   /* Mouse hover effect */
   .sparkle {
     position: absolute;
@@ -221,3 +228,36 @@ footer a:hover {
     }
   }
   
+  .cafe-location h2 {
+    margin-bottom: 15px;
+  }
+  
+  .cafe-location .description {
+    margin-bottom: 20px;
+  }
+  
+  .cafe-location ul {
+    padding-left: 20px; /* Add indentation for list items */
+  }
+  
+  iframe {
+    border-radius: 8px; /* Optional: Adds rounded corners to the map */
+  }
+  
+  .explore-menu-btn {
+  background-color: #f8c6d2; /* Light pink color matching the theme */
+  color: #4e3b31; /* Warm brown for text */
+  font-weight: bold;
+  border: 2px solid #f8c6d2; /* Border matching the background */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  padding: 10px 20px; /* Add padding for a balanced button size */
+  text-transform: uppercase; /* Optional: Makes the text all caps for emphasis */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.explore-menu-btn:hover {
+  background-color: #fcb6c1; /* Slightly darker pink for hover effect */
+  color: #fff; /* White text for contrast */
+  border-color: #fcb6c1; /* Border matches the hover background */
+  transform: scale(1.05); /* Slight zoom on hover */
+}

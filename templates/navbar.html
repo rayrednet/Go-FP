@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg">
+  <style>
+    .navbar {
+      background-color: #f8c6d2; /* Soft baby pink */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Quicksand', sans-serif; /* Apply 'Quicksand' font to navbar */
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #4e3b31;
+      font-family: 'Quicksand', sans-serif; /* Use Quicksand font for the brand */
+      display: flex;
+      align-items: center; /* Align the text and logo vertically */
+    }
+
+    .navbar-brand img {
+      height: 40px; /* Adjust logo height */
+      margin-right: 10px; /* Add some space between the logo and text */
+    }
+
+    .nav-link {
+      color: #4e3b31;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: #d07852; /* Soft brown-orange */
+    }
+
+    .navbar-toggler-icon {
+      color: #4e3b31; /* Adjusting the toggle icon color */
+    }
+  </style>
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/static/images/logo.png" alt="Scarlett's Café Logo">
+      Scarlett's Café
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/products">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="/categories">Category</a></li>
+        <li class="nav-item"><a class="nav-link" href="/baristas">Barista</a></li>
+        <li class="nav-item"><a class="nav-link" href="/reviews">Review</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -5,6 +5,8 @@ import (
 	"log"
 	"math"
 	"math/rand"
+	"strings"
+	"path/filepath"
 	"time"
 
 	"go-final-project/models" 
@@ -30,12 +32,31 @@ func seedCategories(db *gorm.DB) {
 	}
 
 	for _, category := range categories {
-		if err := db.FirstOrCreate(&category, models.Category{Name: category.Name}).Error; err != nil {
-			log.Printf("Failed to seed category %s: %v", category.Name, err)
+		// Generate image path dynamically
+		imagePath := filepath.Join("static", "images", "seed-category", strings.ToLower(strings.ReplaceAll(category.Name, " ", "-"))+".png")
+
+		// Normalize path to use forward slashes
+		imagePath = strings.ReplaceAll(imagePath, "\\", "/")
+
+		// Check if the category already exists
+		var existingCategory models.Category
+		if err := db.First(&existingCategory, "name = ?", category.Name).Error; err == nil {
+			// Update the image path if the category exists
+			existingCategory.ImagePath = imagePath
+			if err := db.Save(&existingCategory).Error; err != nil {
+				log.Printf("Failed to update image path for category %s: %v", category.Name, err)
+			}
+		} else {
+			// Create a new category with the image path
+			category.ImagePath = imagePath
+			if err := db.Create(&category).Error; err != nil {
+				log.Printf("Failed to create category %s: %v", category.Name, err)
+			}
 		}
 	}
 	log.Println("Categories seeded successfully!")
 }
+
 
 func seedProducts(db *gorm.DB) {
 	var categories []models.Category

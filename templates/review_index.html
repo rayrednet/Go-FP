@@ -131,9 +131,11 @@
     {{ template "navbar" . }}
 
     <!-- Reviews Section -->
-    <div class="header">
-        <h1>Customer Reviews</h1>
-    </div>
+   <!-- Header -->
+<div class="header">
+    <h1>Scarlett's Customer Reviews</h1>
+    <p>See what our customers have to say about their experiences with us!</p>
+</div>
     <a href="/reviews/create" class="add-review-btn">Add New Review</a>
     <ul class="reviews-list">
         {{ range .reviews }}

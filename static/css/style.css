@@ -193,7 +193,7 @@ footer a:hover {
     text-align: center;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
-  
+
   .card-image {
     width: 100%; /* Ensures the image takes the full width of the card */
     height: 200px; /* Sets a fixed height for uniformity */
@@ -311,3 +311,31 @@ h1 {
 .btn {
   border-radius: 12px;
 }
+
+        /* Header */
+        .header {
+          margin-top: 3rem; /* Adjust this value to increase or decrease the space */
+          text-align: center;
+          padding: 2rem 1rem; /* Adjust padding for spacing inside the rectangle */
+          color: #4e3b31; /* Warm brown for text */
+          margin-bottom: 2rem;
+          width: 90%; /* Matches the table width */
+          margin-left: auto;
+          margin-right: auto;
+          background: linear-gradient(135deg, #fdeedf, #e2bdd0); /* Pink gradient */
+          border-radius: 20px; /* Rounded corners */
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      }
+      
+      
+    .header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        font-family: 'Quicksand', sans-serif; /* Font for header */
+        color: #4e3b31;
+        margin-bottom: 0.5rem;
+    }
+    .header p {
+        font-size: 1rem;
+        font-weight: 300;
+    }

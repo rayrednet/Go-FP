@@ -34,3 +34,19 @@ func (bc *BaristaController) GetAllBaristas(c *gin.Context) {
 		"baristas": baristas,
 	})
 }
+
+// DeleteBarista deletes a specific barista by ID
+func (bc *BaristaController) DeleteBarista(c *gin.Context) {
+	id := c.Param("id") // Get the barista ID from the URL
+
+	// Find and delete the barista
+	if err := bc.DB.Delete(&models.Barista{}, id).Error; err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", gin.H{
+			"error": "Failed to delete barista",
+		})
+		return
+	}
+
+	// Redirect back to the baristas list
+	c.Redirect(http.StatusFound, "/baristas")
+}

@@ -34,6 +34,8 @@ func RegisterRoutes(r *gin.Engine) {
 	r.POST("/baristas/:id/delete", baristaController.DeleteBarista) // New delete route
 	r.GET("/baristas/:id/edit", baristaController.EditBarista)  // Show edit form
 	r.POST("/baristas/:id/update", baristaController.UpdateBarista)  // Handle update request
+	r.GET("/baristas/create", baristaController.NewBarista) // Show the form
+	r.POST("/baristas", baristaController.CreateBarista)    // Handle form submission
 
 	// Review routes
 	r.GET("/reviews", controllers.GetReviews)

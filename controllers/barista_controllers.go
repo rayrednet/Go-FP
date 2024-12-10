@@ -5,6 +5,8 @@ import (
 	"go-final-project/models"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"strconv"
+	"path/filepath"
 )
 
 // BaristaController structure
@@ -128,4 +130,50 @@ func (bc *BaristaController) UpdateBarista(c *gin.Context) {
 
 	// Redirect to the barista list page
 	c.Redirect(http.StatusFound, "/baristas")
+}
+
+func (bc *BaristaController) NewBarista(c *gin.Context) {
+    c.HTML(http.StatusOK, "barista_create.html", nil)
+}
+
+
+func (bc *BaristaController) CreateBarista(c *gin.Context) {
+    var barista models.Barista
+
+    // Manually bind form fields to the Barista struct
+    barista.Name = c.PostForm("Name")
+    experience, err := strconv.Atoi(c.PostForm("Experience"))
+    if err == nil {
+        barista.Experience = experience
+    }
+    rating, err := strconv.ParseFloat(c.PostForm("Rating"), 64)
+    if err == nil {
+        barista.Rating = rating
+    }
+
+    // Handle profile picture upload
+    file, err := c.FormFile("ProfilePic")
+    if err == nil { // If a file is uploaded
+        filename := filepath.Base(file.Filename)
+        savePath := filepath.Join("static", "uploads", filename)
+        if saveErr := c.SaveUploadedFile(file, savePath); saveErr != nil {
+            c.HTML(http.StatusInternalServerError, "barista_create.html", gin.H{
+                "error": "Failed to save profile picture",
+            })
+            return
+        }
+        // Save a client-accessible path to the database
+        barista.ProfilePic = "/static/uploads/" + filename
+    }
+
+    // Save the new barista to the database
+    if err := bc.DB.Create(&barista).Error; err != nil {
+        c.HTML(http.StatusInternalServerError, "barista_create.html", gin.H{
+            "error": "Failed to create barista",
+        })
+        return
+    }
+
+    // Redirect to the baristas list
+    c.Redirect(http.StatusFound, "/baristas")
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Barista - Scarlett's Cafe</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f1e7;
+            font-family: 'Poppins', sans-serif;
+            color: #4e3b31;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #f8c6d2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4e3b31;
+        }
+
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            color: #4e3b31;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+{{ template "navbar" . }}
+
+<!-- Add Barista Form -->
+<div class="container mt-5">
+    <h1>Add New Barista</h1>
+    {{if .error}}
+    <div class="alert alert-danger">
+        {{.error}}
+    </div>
+    {{end}}
+    <form action="/baristas" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="experience" class="form-label">Experience (Years)</label>
+            <input type="number" class="form-control" id="experience" name="Experience" required>
+        </div>
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="number" step="0.1" class="form-control" id="rating" name="Rating" required>
+        </div>
+        <div class="mb-3">
+            <label for="profile_pic" class="form-label">Profile Picture</label>
+            <input type="file" class="form-control" id="profile_pic" name="ProfilePic">
+        </div>
+        <button type="submit" class="btn btn-success">Add Barista</button>
+        <a href="/baristas" class="btn btn-secondary">Cancel</a>
+    </form>
+=    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

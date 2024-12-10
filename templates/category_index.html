@@ -89,10 +89,14 @@
 <!-- Navbar -->
 {{ template "navbar" . }}
 
+<div class="header">
+    <h1>Scarlett's Menu Categories</h1>
+    <p>Explore our wide range of curated menu categories!</p>
+</div>
+
 <!-- Categories Cards -->
 <div class="container mt-5">
-    <h1>Scarlett's Menu Categories</h1>
-    <p class="text-center">Explore our wide range of curated menu categories!</p>
+    <p class="text-center"></p>
     <a href="/categories/create" class="btn btn-success mb-3">Add New Category</a>
     <div class="row">
         {{range .categories}}

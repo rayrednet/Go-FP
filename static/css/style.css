@@ -311,7 +311,6 @@ h1 {
 .btn {
   border-radius: 12px;
 }
-
         /* Header */
         .header {
           margin-top: 3rem; /* Adjust this value to increase or decrease the space */
@@ -319,7 +318,7 @@ h1 {
           padding: 2rem 1rem; /* Adjust padding for spacing inside the rectangle */
           color: #4e3b31; /* Warm brown for text */
           margin-bottom: 2rem;
-          width: 90%; /* Matches the table width */
+          width: 70%; /* Matches the table width */
           margin-left: auto;
           margin-right: auto;
           background: linear-gradient(135deg, #fdeedf, #e2bdd0); /* Pink gradient */

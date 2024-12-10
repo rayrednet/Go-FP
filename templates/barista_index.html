@@ -39,13 +39,24 @@
             margin-bottom: 2rem;
         }
 
-        .table th {
-            background-color: #f2c3c3;
-            color: #3e2723;
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 12px;
+            background-color: #fff;
         }
 
-        .table td {
+        .card img {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .card-body {
             color: #4e3b31;
+        }
+
+        .btn {
+            border-radius: 12px;
         }
 
         footer {
@@ -67,58 +78,42 @@
             color: #d07852;
         }
     </style>
-    
-    <script>
-        function confirmDelete(event) {
-            if (!confirm("Are you sure you want to delete this barista?")) {
-                event.preventDefault();
-            }
-        }
-    </script>
 </head>
 <body>
 
 <!-- Navbar -->
 {{ template "navbar" . }}
 
-<!-- Baristas Table -->
+<!-- Baristas Cards -->
 <div class="container mt-5">
     <h1>Scarlett's Baristas</h1>
     <a href="/baristas/create" class="btn btn-success mb-3">Add New Barista</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Experience (Years)</th>
-                <th>Rating</th>
-                <th>Profile Picture</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{range .baristas}}
-                <tr>
-                    <td>{{.Name}}</td>
-                    <td>{{.Experience}}</td>
-                    <td>{{printf "%.1f" .Rating}}</td> <!-- Format rating to one decimal place -->
-                    <td>
-                        <img src="{{.ProfilePic}}" alt="{{.Name}}" width="100" height="100">
-                    </td>
-                    <td>
-                        <a href="/baristas/{{.ID}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="/baristas/{{.ID}}/delete" method="POST" style="display:inline;" onsubmit="confirmDelete(event)">
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            {{else}}
-                <tr>
-                    <td colspan="5">No baristas found</td>
-                </tr>
-            {{end}}
-        </tbody>        
-    </table>
+    <div class="row">
+        {{range .baristas}}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{.ProfilePic}}" class="card-img-top" alt="{{.Name}}" height="200">
+                <div class="card-body">
+                    <h5 class="card-title">{{.Name}}</h5>
+                    <p class="card-text">
+                        <strong>Experience:</strong> {{.Experience}} years<br>
+                        <strong>Rating:</strong> {{printf "%.1f" .Rating}}
+                    </p>
+                    <a href="/baristas/{{.ID}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="/baristas/{{.ID}}/delete" method="POST" style="display:inline;" onsubmit="confirmDelete(event)">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-12 text-center">
+            <p>No baristas found.</p>
+        </div>
+        {{end}}
+    </div>
 </div>
+
 
 <!-- Footer -->
 {{ template "footer" . }}

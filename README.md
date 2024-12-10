@@ -53,3 +53,29 @@ After this, you should see your project running on http://localhost:8080/
 
 ## Overview
 
+### Home Page
+![image](https://github.com/user-attachments/assets/b26a0c26-3492-4309-b079-a6a312f650e8)
+
+## Menu Page
+![image](https://github.com/user-attachments/assets/864630c4-3cf7-456a-937c-4387aecf040a)
+
+## View Menu
+![image](https://github.com/user-attachments/assets/f4bfb9a0-d53d-4b83-ab96-32130499d0e3)
+
+## Detail Menu 
+![image](https://github.com/user-attachments/assets/e3104226-246f-4804-8b85-9e076405e70e)
+
+## Delete Menu
+![image](https://github.com/user-attachments/assets/cfa5d60d-6d15-4782-9379-3cada8d27988)
+
+## Edit Menu
+![image](https://github.com/user-attachments/assets/bc3e263f-83fd-4f2c-a987-e9d34e6acbf6)
+
+## Category Page
+![image](https://github.com/user-attachments/assets/64aed20f-660a-4e67-b69c-da041ff31fdb)
+
+## Add New Category
+![image](https://github.com/user-attachments/assets/bcf4539f-ce58-4d51-a258-035eb528bdf2)
+
+## Delete Category
+![image](https://github.com/user-attachments/assets/4367dad3-98a6-446d-881f-cd923c7f782d)

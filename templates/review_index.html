@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f1e7; /* Pastel cream background */
+            font-family: 'Poppins', sans-serif; /* Aesthetic font for body */
+            color: #4e3b31; /* Warm brown text */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Navbar */
+        .navbar {
+            background-color: #f8c6d2; /* Soft baby pink */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4e3b31;
+            font-family: 'Quicksand', sans-serif; /* Font for the brand name */
+        }
+        .nav-link {
+            color: #4e3b31;
+            font-weight: 500;
+        }
+        .nav-link:hover {
+            color: #d07852; /* Soft brown-orange */
+        }
+        /* Reviews Section */
+        .header {
+            text-align: center;
+            padding: 1rem 0; /* Reduced padding to bring it closer */
+            color: #333;
+            margin-bottom: 1rem; /* Reduced margin */
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Quicksand', sans-serif;
+            color: #4e3b31;
+            margin-bottom: 0.5rem;
+        }
+        .reviews-list {
+            list-style: none; /* Remove list bullets */
+            padding-left: 0;
+        }
+        .reviews-list li {
+            background-color: #fff8f1; /* Soft pastel beige */
+            margin: 1.2rem 0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e0c9a6; /* Light border */
+            width: 80%; /* Shortened border width */
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease; /* Smooth transition for hover effect */
+        }
+        .reviews-list li:hover {
+            background-color: #f8d9e1; /* Soft pink background on hover */
+            transform: scale(1.02); /* Slightly scale up on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
+        }
+        .reviews-list li strong {
+            font-size: 1.1rem;
+            color: #d07852; /* Soft brown-orange */
+        }
+        .reviews-list li .product-name {
+            font-weight: 600;
+            color: #4e3b31;
+        }
+        .reviews-list li .review {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        .add-review-btn {
+            background-color: #c8e6c9; /* Light pastel green */
+            color: #4e3b31;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px; /* Reduced margin to bring it closer */
+            width: auto;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .add-review-btn:hover {
+            background-color: #a5d6a7;
+        }
+        /* Footer */
+        footer {
+            background-color: #f8c6d2;
+            padding: 1.5rem 0;
+            text-align: center;
+            color: #4e3b31;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            color: #4e3b31;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            color: #d07852;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Scarlett's Café</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categories">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/baristas">Barista</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Reviews Section -->
+    <div class="header">
+        <h1>Customer Reviews</h1>
+    </div>
+    <a href="/reviews/create" class="add-review-btn">Add New Review</a>
+    <ul class="reviews-list">
+        {{ range .reviews }}
+        <li>
+            <strong>{{ .CustName }}</strong> ({{ .CustEmail }})<br>
+            Product: <span class="product-name">{{ .Product.Name }}</span><br>
+            Review: <span class="review">{{ .Review }}</span>
+        </li>
+        {{ end }}
+    </ul>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Scarlett's Café | Crafted with ❤️ and ☕</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

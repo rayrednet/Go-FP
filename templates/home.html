@@ -1,102 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
-  <title>Scarlett's Café</title>
-  <link rel="stylesheet" href="/static/css/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
-</head>
-<body>
+{{ define "title" }}Home - Scarlett's Café{{ end }}
 
-<!-- Include Navbar -->
-{{ template "navbar.html" . }}
-
-<!-- Hero Section -->
-<div class="container mt-5">
-  <div class="hero">
-    <h1>Welcome to Scarlett's Café</h1>
-    <p>Discover the beauty of every brew ☕</p>
-    <a href="/products" class="btn btn-primary">Explore Menu</a>
-  </div>
+{{ define "content" }}
+<div class="hero text-center">
+  <h1>Welcome to Scarlett's Café</h1>
+  <p>Discover the beauty of every brew ☕</p>
+  <a href="/products" class="btn btn-primary">Explore Menu</a>
 </div>
 
-<!-- Content -->
-<div class="container mt-5">
+<div class="featured-menu mt-5">
   <h2>Featured Menu</h2>
-  <!-- Content Goes Here -->
-   <!-- Featured Menu -->
-
-<div class="container mt-5">
-
-  <h2 class="text-center mb-4" style="color: #4e3b31;">Featured Menu</h2>
-
   <div class="row">
-
     <div class="col-md-4">
-
       <div class="card">
-
         <img src="https://img.freepik.com/premium-photo/grilled-cheese_908985-49326.jpg" class="card-img-top" alt="Grilled Sandwich">
-
         <div class="card-body">
-
           <h5 class="card-title text-center">Grilled Sandwich</h5>
-
           <p class="text-center">Crispy golden crust and cheesy perfection.</p>
-
         </div>
-
       </div>
-
     </div>
-
     <div class="col-md-4">
-
       <div class="card">
-
         <img src="https://img.freepik.com/premium-photo/coffee-hd-image_597327-1369.jpg" class="card-img-top" alt="Espresso">
-
         <div class="card-body">
-
           <h5 class="card-title text-center">Espresso</h5>
-
           <p class="text-center">Bold and rich, crafted for coffee lovers.</p>
-
         </div>
-
       </div>
-
     </div>
-
     <div class="col-md-4">
-
       <div class="card">
-
         <img src="https://img.pikbest.com/origin/09/32/38/764pIkbEsTdpy.jpg!w700wp" class="card-img-top" alt="Chocolate Cake">
-
         <div class="card-body">
-
           <h5 class="card-title text-center">Chocolate Cake</h5>
-
           <p class="text-center">A decadent treat for sweet cravings.</p>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </div>
-</div>
-
-<!-- Include Footer -->
-{{ template "footer.html" . }}
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{{ end }}

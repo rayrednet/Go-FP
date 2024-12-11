@@ -250,15 +250,18 @@
         <div class="col">
             <div class="card">
                 <div class="image-container">
-                    {{if .ImagePath}}
-                    <img src="{{.ImagePath}}" class="card-img-top" alt="{{.Name}}">
-                    {{else}}
-                    <img src="/static/images/default-placeholder.png" class="card-img-top" alt="No Image Available">
-                    {{end}}
-                    <div class="card-hover-overlay">
-                        <p>Click to view details</p>
-                    </div>
-                </div>
+                    <a href="/products/{{.ID}}">
+                        {{if .ImagePath}}
+                        <img src="{{.ImagePath}}" class="card-img-top" alt="{{.Name}}">
+                        {{else}}
+                        <img src="/static/images/default-placeholder.png" class="card-img-top" alt="No Image Available">
+                        {{end}}
+                        <div class="card-hover-overlay">
+                            <p>Click to view details</p>
+                        </div>
+                    </a>
+                </div>                
+                
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{.Name}}</h5>
                     <p class="card-text description">{{.Description}}</p>
@@ -305,28 +308,22 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Select all cards
-        const cards = document.querySelectorAll(".card");
+    // Select all cards
+    const cards = document.querySelectorAll(".card");
 
-        cards.forEach(card => {
-            // Find the edit link for this card
-            const editLink = card.querySelector(".btn-edit");
-            
-            if (editLink) {
-                // Make the entire card clickable
-                card.style.cursor = "pointer";
-                card.addEventListener("click", function (event) {
-                    // Prevent the click if the delete button or detail button is clicked
-                    if (event.target.closest(".btn-delete") || event.target.closest(".btn-detail")) {
-                        return;
-                    }
-                    
-                    // Navigate to the edit page
-                    window.location.href = editLink.getAttribute("href");
-                });
+    cards.forEach(card => {
+        // Find the delete button and detail button for this card
+        const deleteButton = card.querySelector(".btn-delete");
+        const detailButton = card.querySelector(".btn-detail");
+
+        card.addEventListener("click", function (event) {
+            // Prevent the click if the delete button or detail button is clicked
+            if (event.target.closest(".btn-delete") || event.target.closest("a[href^='/products/']")) {
+                return;
             }
         });
     });
+});
 </script>
 </body>
 </html>

@@ -48,6 +48,22 @@ func CreateProduct(c *gin.Context) {
 		return
 	}
 
+	// Handle image upload
+	file, err := c.FormFile("image")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Image is required"})
+		return
+	}
+
+	filename := filepath.Base(file.Filename)
+	savePath := filepath.Join("static", "uploads", "products", filename)
+
+	if saveErr := c.SaveUploadedFile(file, savePath); saveErr != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to upload image"})
+		return
+	}
+
+	// Create product instance
 	product := models.Product{
 		Name:          input.Name,
 		Description:   input.Description,
@@ -56,8 +72,10 @@ func CreateProduct(c *gin.Context) {
 		AvailableHour: input.AvailableHour,
 		Rating:        input.Rating,
 		Stock:         input.Stock,
+		ImagePath:     filepath.ToSlash(savePath), // Normalize the path
 	}
 
+	// Save to database
 	if err := db.Create(&product).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

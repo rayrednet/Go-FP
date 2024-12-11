@@ -13,6 +13,26 @@
     <!-- Lucide Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-css@0.263.1/dist/lucide.min.css">
     <style>
+        .barista-info {
+    display: flex;
+    align-items: center;
+    gap: 0px; /* Reduce the gap between the image and the name */
+}
+
+.barista-image {
+    width: 32px; /* Adjust the size as needed */
+    height: 32px; /* Ensure a square size */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image is properly scaled */
+    border: 2px solid #f8c6d2; /* Optional: Add a border for aesthetics */
+}
+
+.barista-name {
+    font-size: 0.9rem;
+    color: #4e3b31; /* Match the text color with your theme */
+    font-weight: 500;
+}
+
         body {
             background-color: #f9f1e7;
             font-family: 'Poppins', sans-serif;
@@ -266,7 +286,13 @@
                     <h5 class="card-title">{{.Name}}</h5>
                     <p class="card-text description">{{.Description}}</p>
                     <p class="card-text category"><strong>Category:</strong> {{.Category.Name}}</p>
-                    <p class="card-text barista"><strong>Barista:</strong> {{.Barista.Name}}</p>
+                    <div class="card-text barista d-flex align-items-center">
+                        <strong>Barista:</strong>
+                        <div class="barista-info d-flex align-items-center ms-2">
+                            <img src="{{.Barista.ProfilePic}}" alt="{{.Barista.Name}}" class="barista-image">
+                            <span class="barista-name ms-2">{{.Barista.Name}}</span>
+                        </div>
+                    </div>                    
                     <p class="card-text price"><strong>Price:</strong> ${{.Price}}</p>
                     <div class="btn-group">
                         <a href="/products/{{.ID}}/edit" class="btn-edit" title="Edit">

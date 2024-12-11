@@ -260,12 +260,13 @@
                             <p>Click to view details</p>
                         </div>
                     </a>
-                </div>                
+                </div>
                 
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{.Name}}</h5>
                     <p class="card-text description">{{.Description}}</p>
                     <p class="card-text category"><strong>Category:</strong> {{.Category.Name}}</p>
+                    <p class="card-text barista"><strong>Barista:</strong> {{.Barista.Name}}</p>
                     <p class="card-text price"><strong>Price:</strong> ${{.Price}}</p>
                     <div class="btn-group">
                         <a href="/products/{{.ID}}/edit" class="btn-edit" title="Edit">
@@ -292,6 +293,7 @@
         {{end}}
     </div>
 </div>
+
 
 {{ template "footer" . }}
 

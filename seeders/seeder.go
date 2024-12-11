@@ -29,6 +29,7 @@ func seedCategories(db *gorm.DB) {
 		{Name: "Dessert", Description: "Sweet treats to satisfy your cravings."},
 		{Name: "Appetizer", Description: "Small bites to get you started."},
 		{Name: "Beverages", Description: "Refreshing drinks to pair with your meal."},
+		{Name: "Cultural Delights", Description: "Explore foods inspired by various cuisines."},
 	}
 
 	for _, category := range categories {
@@ -60,11 +61,12 @@ func seedCategories(db *gorm.DB) {
 func SeedProducts(db *gorm.DB) {
     var categories []models.Category
     if err := db.Find(&categories).Error; err != nil {
-        log.Fatalf("Failed to fetch categories: %v", err)
+		log.Fatalf("Failed to fetch categories: %v", err)
     }
-
-    // We are no longer dealing with baristas here.
-    // This ensures no foreign key constraints or barista lookups are performed.
+	var baristas []models.Barista
+	if err := db.Find(&baristas).Error; err != nil {
+		log.Fatalf("Failed to fetch baristas: %v", err)
+	}
 
     rand.Seed(time.Now().UnixNano())
 
@@ -113,6 +115,7 @@ func SeedProducts(db *gorm.DB) {
             Rating:        math.Round((rand.Float64()*4+1)*100) / 100, // Rating 1.00 to 5.00
             Stock:         rand.Intn(100) + 1,                        // Stock between 1 and 100
             ImagePath:     imagePath,
+			BaristaID:     baristas[rand.Intn(len(baristas))].ID,
         }
 
         if err := db.Create(&product).Error; err != nil {

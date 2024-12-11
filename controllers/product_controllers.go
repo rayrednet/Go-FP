@@ -9,25 +9,33 @@ import (
 )
 
 func GetProducts(c *gin.Context) {
-	var products []models.Product
-	if err := db.Preload("Category").Find(&products).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	c.HTML(http.StatusOK, "product_index.html", gin.H{
-		"products": products,
-	})
+    var products []models.Product
+    if err := db.Preload("Category").Preload("Barista").Find(&products).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    c.HTML(http.StatusOK, "product_index.html", gin.H{
+        "products": products,
+    })
 }
 
 func NewProduct(c *gin.Context) {
 	var categories []models.Category
+	var baristas []models.Barista
+
 	if err := db.Find(&categories).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := db.Find(&baristas).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.HTML(http.StatusOK, "product_create.html", gin.H{
 		"categories": categories,
+		"baristas":   baristas,
 		"product":    nil,
 	})
 }
@@ -38,6 +46,7 @@ func CreateProduct(c *gin.Context) {
 		Description   string  `form:"description" binding:"required"`
 		Price         float64 `form:"price" binding:"required"`
 		CategoryID    uint    `form:"category_id" binding:"required"`
+		BaristaID     uint    `form:"barista_id" binding:"required"`
 		AvailableHour string  `form:"available_hour" binding:"required"`
 		Rating        float64 `form:"rating" binding:"required"`
 		Stock         int     `form:"stock" binding:"required"`
@@ -69,6 +78,7 @@ func CreateProduct(c *gin.Context) {
 		Description:   input.Description,
 		Price:         input.Price,
 		CategoryID:    input.CategoryID,
+		BaristaID:     input.BaristaID,
 		AvailableHour: input.AvailableHour,
 		Rating:        input.Rating,
 		Stock:         input.Stock,
@@ -87,7 +97,7 @@ func CreateProduct(c *gin.Context) {
 func EditProduct(c *gin.Context) {
 	id := c.Param("id")
 	var product models.Product
-	if err := db.Preload("Category").First(&product, id).Error; err != nil {
+	if err := db.Preload("Category").Preload("Barista").First(&product, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
@@ -98,7 +108,14 @@ func EditProduct(c *gin.Context) {
 	}
 
 	var categories []models.Category
+	var baristas []models.Barista
+
 	if err := db.Find(&categories).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := db.Find(&baristas).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -106,6 +123,7 @@ func EditProduct(c *gin.Context) {
 	c.HTML(http.StatusOK, "product_edit.html", gin.H{
 		"product":    product,
 		"categories": categories,
+		"baristas":   baristas,
 	})
 }
 
@@ -122,6 +140,7 @@ func UpdateProduct(c *gin.Context) {
 		Description   string  `form:"description" binding:"required"`
 		Price         float64 `form:"price" binding:"required"`
 		CategoryID    uint    `form:"category_id" binding:"required"`
+		BaristaID     uint    `form:"barista_id" binding:"required"`
 		AvailableHour string  `form:"available_hour" binding:"required"`
 		Rating        float64 `form:"rating" binding:"required"`
 		Stock         int     `form:"stock" binding:"required"`
@@ -137,6 +156,7 @@ func UpdateProduct(c *gin.Context) {
 	product.Description = input.Description
 	product.Price = input.Price
 	product.CategoryID = input.CategoryID
+	product.BaristaID = input.BaristaID
 	product.AvailableHour = input.AvailableHour
 	product.Rating = input.Rating
 	product.Stock = input.Stock
@@ -165,19 +185,10 @@ func UpdateProduct(c *gin.Context) {
 	c.Redirect(http.StatusFound, "/products")
 }
 
-func DeleteProduct(c *gin.Context) {
-	id := c.Param("id")
-	if err := db.Delete(&models.Product{}, id).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	c.Redirect(http.StatusFound, "/products")
-}
-
 func ShowProduct(c *gin.Context) {
 	id := c.Param("id")
 	var product models.Product
-	if err := db.Preload("Category").First(&product, id).Error; err != nil {
+	if err := db.Preload("Category").Preload("Barista").First(&product, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
@@ -185,4 +196,13 @@ func ShowProduct(c *gin.Context) {
 	c.HTML(http.StatusOK, "product_detail.html", gin.H{
 		"product": product,
 	})
+}
+
+func DeleteProduct(c *gin.Context) {
+	id := c.Param("id")
+	if err := db.Delete(&models.Product{}, id).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.Redirect(http.StatusFound, "/products")
 }

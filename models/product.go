@@ -13,4 +13,6 @@ type Product struct {
     Rating        float64
     Stock         int
     ImagePath     string  `gorm:"type:varchar(255)"`
+    BaristaID     uint
+    Barista       Barista `gorm:"foreignKey:BaristaID"`
 }

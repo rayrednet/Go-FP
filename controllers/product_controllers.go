@@ -9,14 +9,14 @@ import (
 )
 
 func GetProducts(c *gin.Context) {
-    var products []models.Product
-    if err := db.Preload("Category").Preload("Barista").Find(&products).Error; err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-        return
-    }
-    c.HTML(http.StatusOK, "product_index.html", gin.H{
-        "products": products,
-    })
+	var products []models.Product
+	if err := db.Preload("Category").Preload("Barista").Find(&products).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.HTML(http.StatusOK, "product_index.html", gin.H{
+		"products": products,
+	})
 }
 
 func NewProduct(c *gin.Context) {
@@ -130,53 +130,74 @@ func EditProduct(c *gin.Context) {
 func UpdateProduct(c *gin.Context) {
 	id := c.Param("id")
 	var product models.Product
+
+	// Fetch the existing product from the database
 	if err := db.First(&product, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
 
+	// Parse form data
 	var input struct {
-		Name          string  `form:"name" binding:"required"`
-		Description   string  `form:"description" binding:"required"`
-		Price         float64 `form:"price" binding:"required"`
-		CategoryID    uint    `form:"category_id" binding:"required"`
-		BaristaID     uint    `form:"barista_id" binding:"required"`
-		AvailableHour string  `form:"available_hour" binding:"required"`
-		Rating        float64 `form:"rating" binding:"required"`
-		Stock         int     `form:"stock" binding:"required"`
+		Name          string  `form:"name"`
+		Description   string  `form:"description"`
+		Price         float64 `form:"price"`
+		CategoryID    uint    `form:"category_id"`
+		AvailableHour string  `form:"available_hour"`
+		Rating        float64 `form:"rating"`
+		Stock         int     `form:"stock"`
+		BaristaID     uint    `form:"barista_id"`
 	}
 
+	// Only bind and validate fields included in the form
 	if err := c.ShouldBind(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// Update product fields
-	product.Name = input.Name
-	product.Description = input.Description
-	product.Price = input.Price
-	product.CategoryID = input.CategoryID
-	product.BaristaID = input.BaristaID
-	product.AvailableHour = input.AvailableHour
-	product.Rating = input.Rating
-	product.Stock = input.Stock
+	// Update fields if provided in the form
+	if input.Name != "" {
+		product.Name = input.Name
+	}
+	if input.Description != "" {
+		product.Description = input.Description
+	}
+	if input.Price != 0 {
+		product.Price = input.Price
+	}
+	if input.CategoryID != 0 {
+		product.CategoryID = input.CategoryID
+	}
+	if input.AvailableHour != "" {
+		product.AvailableHour = input.AvailableHour
+	}
+	if input.Rating != 0 {
+		product.Rating = input.Rating
+	}
+	if input.Stock != 0 {
+		product.Stock = input.Stock
+	}
+	if input.BaristaID != 0 {
+		product.BaristaID = input.BaristaID
+	}
 
 	// Handle image upload
 	file, err := c.FormFile("image")
-	if err == nil { // File is uploaded
+	if err == nil { // If a file is uploaded
 		filename := filepath.Base(file.Filename)
 		savePath := filepath.Join("static", "uploads", "products", filename)
 
-		// Save the file to the uploads folder
+		// Save the uploaded file
 		if saveErr := c.SaveUploadedFile(file, savePath); saveErr != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to upload image"})
 			return
 		}
 
-		// Update the image path in the database
+		// Update the image path
 		product.ImagePath = filepath.ToSlash(savePath)
 	}
 
+	// Save the updated product to the database
 	if err := db.Save(&product).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

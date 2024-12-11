@@ -147,7 +147,13 @@
     <div>
         <label for="image">Current Image:</label>
         <div class="mb-3 current-image">
+            {{if hasPrefix .product.ImagePath "https"}}
+            <!-- Absolute URL for external images -->
+            <img src="{{ .product.ImagePath }}" alt="{{ .product.Name }}">
+            {{else}}
+            <!-- Relative URL for local images -->
             <img src="/{{ .product.ImagePath }}" alt="{{ .product.Name }}">
+            {{end}}
         </div>
     </div>
     

@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/gin-gonic/gin"
 	"go-final-project/config"
 	"go-final-project/models"
-	"go-final-project/seeders"
 	"go-final-project/routes"
+	"go-final-project/seeders"
 )
 
 func main() {
@@ -25,8 +27,13 @@ func main() {
 	// Initialize Gin router
 	r := gin.Default()
 
+	// Register the `hasPrefix` function
+	r.SetFuncMap(map[string]interface{}{
+		"hasPrefix": strings.HasPrefix,
+	})
+
 	// Serve static files
-	r.Static("/static", "./static") // Ensure this is only defined here
+	r.Static("/static", "./static")
 
 	// Load HTML templates
 	r.LoadHTMLGlob("templates/*")

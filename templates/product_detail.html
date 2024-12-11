@@ -156,11 +156,20 @@
 <div class="container">
     <div class="card">
         <!-- Display the product image -->
-        {{if .product.ImagePath}}
-        <img src="/{{ .product.ImagePath }}" alt="{{ .product.Name }}" class="product-img">
-        {{else}}
-        <img src="/static/images/default-placeholder.png" alt="No Image Available" class="product-img">
-        {{end}}
+        <!-- Display the product image -->
+{{if .product.ImagePath}}
+<div class="mb-3 current-image">
+    {{if hasPrefix .product.ImagePath "https"}}
+    <!-- Absolute URL for external images -->
+    <img src="{{ .product.ImagePath }}" alt="{{ .product.Name }}">
+    {{else}}
+    <!-- Relative URL for local images -->
+    <img src="/{{ .product.ImagePath }}" alt="{{ .product.Name }}">
+    {{end}}
+</div>
+{{else}}
+<img src="/static/images/default-placeholder.png" alt="No Image Available" class="product-img">
+{{end}}
 
         <!-- Product Details -->
         <h1>{{.product.Name}}</h1>

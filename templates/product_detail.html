@@ -15,10 +15,10 @@
     }
 
     .barista-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
+        width: 40px; /* Adjust the size as needed */
+        height: 40px; /* Ensure a square size */
+        border-radius: 50%; /* Makes the image circular */
+        object-fit: cover; /* Ensures the image is properly scaled */
         margin-right: 10px;
         border: 2px solid #f8c6d2; /* Optional for aesthetics */
     }
@@ -28,6 +28,7 @@
         color: #4e3b31;
         font-weight: 500;
     }
+
 
 
 
@@ -134,24 +135,14 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
 
-        footer {
-            background-color: #f8c6d2;
-            padding: 1.5rem 0;
-            text-align: center;
-            color: #4e3b31;
-            font-size: 0.9rem;
-            margin-top: auto;
-        }
-
-        footer a {
-            color: #4e3b31;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        footer a:hover {
-            color: #d07852;
-        }
+        .product-img {
+        width: 200px; /* Set the fixed width */
+        height: 200px; /* Set the fixed height */
+        object-fit: cover; /* Ensures the image maintains its aspect ratio */
+        border-radius: 8px; /* Optional: Adds rounded corners */
+        display: block;
+        margin: 0 auto 1.5rem; /* Centers the image and adds bottom margin */
+    }
     </style>
 </head>
 <body>
@@ -166,9 +157,9 @@
     <div class="card">
         <!-- Display the product image -->
         {{if .product.ImagePath}}
-        <img src="{{.product.ImagePath}}" alt="{{.product.Name}}">
+        <img src="/{{ .product.ImagePath }}" alt="{{ .product.Name }}" class="product-img">
         {{else}}
-        <img src="/static/images/default-placeholder.png" alt="No Image Available">
+        <img src="/static/images/default-placeholder.png" alt="No Image Available" class="product-img">
         {{end}}
 
         <!-- Product Details -->

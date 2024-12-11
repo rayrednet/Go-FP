@@ -84,11 +84,14 @@
         }
 
         .current-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
+        width: 200px; /* Set a fixed width */
+        height: 200px; /* Set a fixed height */
+        object-fit: cover; /* Maintain aspect ratio and crop excess */
+        border-radius: 8px; /* Optional: Add rounded corners */
+        border: 1px solid #ddd; /* Optional: Add a border for aesthetics */
+        display: block; /* Center alignment for the image */
+        margin: 0 auto; /* Center horizontally */
+    }
     </style>
 </head>
 <body>
@@ -143,9 +146,8 @@
 
     <div>
         <label for="image">Current Image:</label>
-        <div class="mb-3">
-            <img src="{{ .product.ImagePath }}" alt="{{ .product.Name }}" 
-                 style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px;">
+        <div class="mb-3 current-image">
+            <img src="/{{ .product.ImagePath }}" alt="{{ .product.Name }}">
         </div>
     </div>
     

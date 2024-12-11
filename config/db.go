@@ -41,6 +41,13 @@ func GetDB() *gorm.DB {
 
 		fmt.Println("Connected to the database successfully")
 
+		// **Drop the Category table if it exists**
+		err = DB.Migrator().DropTable(&models.Category{})
+		if err != nil {
+			log.Fatalf("Error dropping Category table: %v", err)
+		}
+		fmt.Println("Dropped existing Category table")
+
 		// Run migrations
 		err = DB.AutoMigrate(
 			&models.Barista{},

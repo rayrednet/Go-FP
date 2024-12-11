@@ -14,10 +14,10 @@ import (
 )
 
 func SeedDatabase(db *gorm.DB) {
-	seedCategories(db)
-	seedProducts(db)
-	seedReviews(db)
 	SeedBaristas(db)
+	seedCategories(db)
+	SeedProducts(db)
+	seedReviews(db)
 
 	log.Println("Database seeding completed!")
 }
@@ -57,62 +57,72 @@ func seedCategories(db *gorm.DB) {
 	log.Println("Categories seeded successfully!")
 }
 
+func SeedProducts(db *gorm.DB) {
+    var categories []models.Category
+    if err := db.Find(&categories).Error; err != nil {
+        log.Fatalf("Failed to fetch categories: %v", err)
+    }
 
-func seedProducts(db *gorm.DB) {
-	var categories []models.Category
-	if err := db.Find(&categories).Error; err != nil {
-		log.Fatalf("Failed to fetch categories: %v", err)
-	}
+    // We are no longer dealing with baristas here.
+    // This ensures no foreign key constraints or barista lookups are performed.
 
-	rand.Seed(time.Now().UnixNano())
-	productNames := []string{
-		"Matcha Pancakes", "Avocado Toast", "Chocolate Lava Cake",
-		"Caesar Salad", "Mushroom Soup", "Egg Benedict",
-		"Berry Smoothie Bowl", "Tiramisu", "French Onion Soup",
-		"Green Tea Latte", "Iced Mocha", "Caramel Frappuccino",
-		"Truffle Fries", "Shrimp Cocktail", "Matcha Soufflé",
-	}
-	productDescriptions := []string{
-		"A delightful dish made with premium matcha powder.",
-		"Perfectly toasted bread topped with fresh avocado and seasoning.",
-		"A rich and decadent chocolate dessert with a gooey center.",
-		"Crisp romaine lettuce with a creamy Caesar dressing.",
-		"A warm and hearty soup made with fresh mushrooms.",
-		"Classic eggs benedict served with hollandaise sauce.",
-		"A healthy and refreshing smoothie bowl with assorted berries.",
-		"Classic Italian dessert with layers of coffee-soaked biscuits and mascarpone.",
-		"A savory soup with caramelized onions and a cheese crust.",
-		"A creamy and aromatic latte with a hint of green tea.",
-		"A refreshing iced coffee with chocolate and whipped cream.",
-		"A sweet and creamy blended coffee topped with caramel.",
-		"Crispy golden fries with a hint of truffle oil.",
-		"Succulent shrimp served with a tangy cocktail sauce.",
-		"A fluffy soufflé infused with premium matcha flavor.",
-	}
+    rand.Seed(time.Now().UnixNano())
 
-	for i := 0; i < 50; i++ {
-		
-		startHour := rand.Intn(12) + 6 
-		endHour := startHour + rand.Intn(5) + 1 
-		
-		availableHour := fmt.Sprintf("%d AM to %d PM", startHour, endHour)
+    productNames := []string{
+        "Matcha Pancakes", "Avocado Toast", "Chocolate Lava Cake",
+        "Caesar Salad", "Mushroom Soup", "Egg Benedict",
+        "Berry Smoothie Bowl", "Tiramisu", "French Onion Soup",
+        "Green Tea Latte", "Iced Mocha", "Caramel Frappuccino",
+        "Truffle Fries", "Shrimp Cocktail", "Matcha Soufflé",
+    }
 
-		product := models.Product{
-			Name:          productNames[rand.Intn(len(productNames))],
-			Description:   productDescriptions[rand.Intn(len(productDescriptions))],
-			
-			Price:         math.Round((rand.Float64()*50+10)*100) / 100, 
-			CategoryID:    categories[rand.Intn(len(categories))].ID,
-			AvailableHour: availableHour,
-			Rating:        math.Round((rand.Float64()*4+1)*100) / 100,  
-			Stock:         rand.Intn(100) + 1,   
-		}
+    productDescriptions := []string{
+        "A delightful dish made with premium matcha powder.",
+        "Perfectly toasted bread topped with fresh avocado and seasoning.",
+        "A rich and decadent chocolate dessert with a gooey center.",
+        "Crisp romaine lettuce with a creamy Caesar dressing.",
+        "A warm and hearty soup made with fresh mushrooms.",
+        "Classic eggs benedict served with hollandaise sauce.",
+        "A healthy and refreshing smoothie bowl with assorted berries.",
+        "Classic Italian dessert with layers of coffee-soaked biscuits and mascarpone.",
+        "A savory soup with caramelized onions and a cheese crust.",
+        "A creamy and aromatic latte with a hint of green tea.",
+        "A refreshing iced coffee with chocolate and whipped cream.",
+        "A sweet and creamy blended coffee topped with caramel.",
+        "Crispy golden fries with a hint of truffle oil.",
+        "Succulent shrimp served with a tangy cocktail sauce.",
+        "A fluffy soufflé infused with premium matcha flavor.",
+    }
 
-		if err := db.Create(&product).Error; err != nil {
-			log.Printf("Failed to seed product %s: %v", product.Name, err)
-		}
-	}
-	log.Println("Products seeded successfully!")
+    for i := 0; i < 50; i++ {
+        // Generate available hours
+        startHour := rand.Intn(12) + 6  // 6 AM to 17 PM
+        endHour := startHour + rand.Intn(5) + 1 // Add 1 to 5 hours
+        availableHour := fmt.Sprintf("%d AM to %d PM", startHour, endHour)
+
+        // Generate a random image path from Picsum
+        imageSeed := rand.Intn(1000)
+        imagePath := fmt.Sprintf("https://picsum.photos/seed/%d/200/300", imageSeed)
+
+        product := models.Product{
+            Name:          productNames[rand.Intn(len(productNames))],
+            Description:   productDescriptions[rand.Intn(len(productDescriptions))],
+            Price:         math.Round((rand.Float64()*50+10)*100) / 100, // $10.00 to $60.00
+            CategoryID:    categories[rand.Intn(len(categories))].ID,
+            AvailableHour: availableHour,
+            Rating:        math.Round((rand.Float64()*4+1)*100) / 100, // Rating 1.00 to 5.00
+            Stock:         rand.Intn(100) + 1,                        // Stock between 1 and 100
+            ImagePath:     imagePath,
+        }
+
+        if err := db.Create(&product).Error; err != nil {
+            log.Printf("Failed to seed product %s: %v", product.Name, err)
+        } else {
+            log.Printf("Seeded product: %s (ImagePath: %s)", product.Name, product.ImagePath)
+        }
+    }
+
+    log.Println("Products seeded successfully!")
 }
 
 func seedReviews(db *gorm.DB) {

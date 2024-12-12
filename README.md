@@ -56,8 +56,12 @@ After this, you should see your project running on http://localhost:8080/
 5. User can update an existing category.
 6. User can delete a category.
 7. User can view and add a new review
+8. User can add a new barista.
+9. User can update and delete barista.
 
 # Table Structures
+![image](https://github.com/user-attachments/assets/33186796-38f8-4a03-8dcc-deb3354ac259)
+
 
 ## Overview
 

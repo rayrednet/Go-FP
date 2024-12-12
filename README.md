@@ -31,9 +31,13 @@ cd Go-Fp
 ```
 go mod tidy
 ```
-4. Setup my SQL and use your own username and password on config/db.go
+4. Setup my SQL and use your own username and password on .env
 ```
-dsn := "root:password@tcp(127.0.0.1:3306)/fp_pbkk?charset=utf8mb4&parseTime=True&loc=Local"
+DB_USER=yourusername
+DB_PASSWORD=yourpassword
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=fp_pbkk
 ```
 
 5. Create database fp_pbkk on mySQL
@@ -66,37 +70,57 @@ After this, you should see your project running on http://localhost:8080/
 ## Overview
 
 ### Home Page
-![image](https://github.com/user-attachments/assets/b26a0c26-3492-4309-b079-a6a312f650e8)
+![image](https://github.com/user-attachments/assets/f6eaf8ac-d701-436f-83b3-a105db1c39b4)
+![image](https://github.com/user-attachments/assets/f91ab7c0-f578-4779-8280-aa628329b945)
+![image](https://github.com/user-attachments/assets/51881c66-4c5e-49a8-ba3e-69823b0dbd6a)
+
 
 ## Menu Page
-![image](https://github.com/user-attachments/assets/864630c4-3cf7-456a-937c-4387aecf040a)
+![image](https://github.com/user-attachments/assets/06a06708-dd20-45c7-bba6-c96de7eac2c6)
 
-## View Menu
-![image](https://github.com/user-attachments/assets/f4bfb9a0-d53d-4b83-ab96-32130499d0e3)
+
+## Add Menu
+![image](https://github.com/user-attachments/assets/7e429d01-d07c-4529-92d9-ca71e7229330)
+
 
 ## Detail Menu 
-![image](https://github.com/user-attachments/assets/e3104226-246f-4804-8b85-9e076405e70e)
+![image](https://github.com/user-attachments/assets/c2ddf904-4f94-4179-9f92-f14eadfc04d8)
+
 
 ## Delete Menu
 ![image](https://github.com/user-attachments/assets/cfa5d60d-6d15-4782-9379-3cada8d27988)
 
 ## Edit Menu
-![image](https://github.com/user-attachments/assets/bc3e263f-83fd-4f2c-a987-e9d34e6acbf6)
+![image](https://github.com/user-attachments/assets/6429fce6-d65b-4e85-ac9c-b258ae5278e6)
+
 
 ## Category Page
-![image](https://github.com/user-attachments/assets/64aed20f-660a-4e67-b69c-da041ff31fdb)
+![image](https://github.com/user-attachments/assets/168ae106-27eb-46e4-8dfd-0747fb5ded58)
+
 
 ## Add New Category
-![image](https://github.com/user-attachments/assets/bcf4539f-ce58-4d51-a258-035eb528bdf2)
+![image](https://github.com/user-attachments/assets/387c5f2a-54d9-4671-8983-5544facfcb37)
 
-## Delete Category
-![image](https://github.com/user-attachments/assets/4367dad3-98a6-446d-881f-cd923c7f782d)
+## Edit Category
+![image](https://github.com/user-attachments/assets/c1522b13-2248-47ca-b54c-b260b498da86)
+
+
+
 
 ## Review Page
+![image](https://github.com/user-attachments/assets/76ad8727-94e4-46f9-b3fe-e24abbc8e08d)
 
-
-![image](https://github.com/user-attachments/assets/ba128f6b-bf12-464e-9c4e-cb7a3d91529a)
 
 ## Add Review
+![image](https://github.com/user-attachments/assets/69b7dff4-5e41-4d6a-bbbc-cd55393052b8)
 
-![image](https://github.com/user-attachments/assets/f01bc9d6-4938-4798-81f0-1321a1a350e0)
+## Barista Page
+![image](https://github.com/user-attachments/assets/b39e715e-4bbe-42db-a306-bad0f832b281)
+
+
+## Add Barista 
+![image](https://github.com/user-attachments/assets/4b999c40-e56e-4b5a-b61a-24ab382c2c61)
+
+
+## Edit Barista
+![image](https://github.com/user-attachments/assets/f29e3cf7-d270-442b-98c8-3a72fa16cbc9)

@@ -15,13 +15,28 @@ var db = config.GetDB()
 func GetCategories(c *gin.Context) {
 	var categories []models.Category
 
-	if err := db.Find(&categories).Error; err != nil {
+	// Get the sort query parameter
+	sort := c.Query("sort")
+
+	// Set the default order
+	order := "created_at desc"
+	if sort == "oldest" {
+		order = "created_at asc"
+	}
+
+	// Fetch categories with sorting
+	if err := db.Order(order).Find(&categories).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.HTML(http.StatusOK, "category_index.html", gin.H{"categories": categories})
+	// Pass the categories and current sort option to the template
+	c.HTML(http.StatusOK, "category_index.html", gin.H{
+		"categories": categories,
+		"sort":       sort,
+	})
 }
+
 
 // NewCategory renders the page for creating a new category
 func NewCategory(c *gin.Context) {

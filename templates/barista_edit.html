@@ -124,8 +124,8 @@
         </div>
         <div class="mb-3">
             <label for="rating" class="form-label">Rating</label>
-            <input type="number" step="0.1" class="form-control" id="rating" name="Rating" value="{{printf "%.1f" .barista.Rating}}" required>
-        </div>
+            <input type="number" step="0.1" class="form-control" id="rating" name="Rating" value="{{printf "%.1f" .barista.Rating}}" max="5" required>
+        </div>        
         <div class="mb-3">
             <label for="profile_pic" class="form-label">Current Profile Picture</label>
             <!-- Display the current profile picture -->

@@ -1,4 +1,4 @@
-# 🌟 Final Project Go - Scralett's Cafe
+# 🌟 Final Project Go - Scarlett's Cafe
 
 ## 📝 Group Information
 - *Group Number:* 9

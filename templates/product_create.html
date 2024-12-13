@@ -9,6 +9,56 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
     <style>
+        /* Default slider track */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, red, yellow, green);
+            outline: none;
+            transition: background 0.3s ease-in-out;
+        }
+        
+        /* Slider thumb styling */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #4e3b31;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        /* Slider thumb styling for Firefox */
+        .form-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background-color: #4e3b31;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        /* Number markers styling */
+        .d-flex span {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #4e3b31;
+        }
+        
+        #menu-rating-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #4caf50;
+        }
+        </style>        
+    <style>
         body {
             background-color: #f9f1e7;
             font-family: 'Poppins', sans-serif;
@@ -116,25 +166,36 @@
             background-color: #9ad1d1;
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
+        .btn-save {
+    margin-top: 20px; /* Adds margin at the top */
+    font-size: 1rem; /* Increases font size for better visibility */
+    padding: 12px 24px; /* Adjusts padding for a more prominent button */
+    background-color: #4caf50; /* Primary green color for the button */
+    border: none; /* Removes default border */
+    border-radius: 8px; /* Rounded corners */
+    color: #ffffff; /* White text color */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
 
-        footer {
-            background-color: #f8c6d2;
-            padding: 1.5rem 0;
-            text-align: center;
-            color: #4e3b31;
-            font-size: 0.9rem;
-            margin-top: auto;
-        }
+.btn-save:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
 
-        footer a {
-            color: #4e3b31;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.btn-save:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+    transform: scale(1); /* Resets zoom effect */
+}
 
-        footer a:hover {
-            color: #d07852;
-        }
+.form-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+}
+
     </style>
 </head>
 <body>
@@ -147,84 +208,147 @@
 </div>
 
 <div class="container">
-    <form action="/products" method="POST" enctype="multipart/form-data">
-        <!-- CSRF Token -->
-        <input type="hidden" name="_csrf" value="{{.csrf_token}}">
+    <div class="form-container">
+        <form action="/products" method="POST" enctype="multipart/form-data">
+            <!-- CSRF Token -->
+            <input type="hidden" name="_csrf" value="{{.csrf_token}}">
 
-        <!-- Product Name -->
-        <div class="form-group">
-            <label for="name" class="form-label">Menu Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div>
+            <!-- Product Name -->
+            <div class="form-group">
+                <label for="name" class="form-label">Menu Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
 
-        <!-- Description -->
-        <div class="form-group">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
-        </div>
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
 
-        <!-- Price -->
-<div class="form-group">
-    <label for="price" class="form-label">Price</label>
-    <div class="input-group">
-        <span class="input-group-text">$</span>
-        <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
+            <!-- Price -->
+            <div class="form-group">
+                <label for="price" class="form-label">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+                <label for="category_id" class="form-label">Category</label>
+                <select class="form-control" id="category_id" name="category_id" required>
+                    <option value="" disabled selected>Choose Category</option>
+                    {{range .categories}}
+                        <option value="{{.ID}}">{{.Name}}</option>
+                    {{end}}
+                </select>
+            </div>
+
+            <!-- Available Hour -->
+            <div class="form-group">
+                <label for="available_hour" class="form-label">Available Hour</label>
+                <input type="text" class="form-control" id="available_hour" name="available_hour" required>
+            </div>
+
+            <!-- Rating -->
+            <div class="form-group">
+                <label for="rating-slider" class="form-label">Rating</label>
+                <input 
+                    type="range" 
+                    class="form-range" 
+                    id="rating-slider" 
+                    name="rating" 
+                    min="0" 
+                    max="5" 
+                    step="0.1" 
+                    value="3"
+                    oninput="updateMenuSlider(this)"
+                    required
+                >
+                <div class="d-flex justify-content-between px-1">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+                <p class="mt-2 text-center">Selected Rating: <span id="menu-rating-value">3.0</span></p>
+            </div>
+
+            <!-- Stock -->
+            <div class="form-group">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" required>
+            </div>
+
+            <!-- Barista -->
+            <div class="form-group">
+                <label for="barista_id" class="form-label">Barista</label>
+                <select class="form-control" id="barista_id" name="barista_id" required>
+                    <option value="" disabled selected>Choose Barista</option>
+                    {{range .baristas}}
+                        <option value="{{.ID}}">{{.Name}}</option>
+                    {{end}}
+                </select>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                <div id="image-preview" class="mt-3" style="display: none;">
+                    <img id="preview-img" style="max-width: 100%; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;">
+                    <p id="file-name" style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;"></p>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100 btn-save mt-4">Save</button>
+        </form>
     </div>
-</div>
-
-        <!-- Category -->
-        <div class="form-group">
-            <label for="category_id" class="form-label">Category</label>
-            <select class="form-control" id="category_id" name="category_id" required>
-                <option value="" disabled selected>Choose Category</option>
-                {{range .categories}}
-                    <option value="{{.ID}}">{{.Name}}</option>
-                {{end}}
-            </select>
-        </div>
-
-        <!-- Available Hour -->
-        <div class="form-group">
-            <label for="available_hour" class="form-label">Available Hour</label>
-            <input type="text" class="form-control" id="available_hour" name="available_hour" required>
-        </div>
-
-        <!-- Rating -->
-        <div class="form-group">
-            <label for="rating" class="form-label">Rating</label>
-            <input type="number" class="form-control" id="rating" name="rating" step="0.1" min="0" max="5" required>
-        </div>
-
-        <!-- Stock -->
-        <div class="form-group">
-            <label for="stock" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="stock" name="stock" required>
-        </div>
-
-        <!-- Barista -->
-<div class="form-group">
-    <label for="barista_id" class="form-label">Barista</label>
-    <select class="form-control" id="barista_id" name="barista_id" required>
-        <option value="" disabled selected>Choose Barista</option>
-        {{range .baristas}}
-            <option value="{{.ID}}">{{.Name}}</option>
-        {{end}}
-    </select>
-</div>
-
-
-        <!-- Image Upload -->
-        <div class="form-group">
-            <label for="image" class="form-label">Upload Image</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
-        </div>
-
-        <button type="submit" class="btn btn-success w-100 btn-save">Save</button>
-    </form>
 </div>
 
 {{ template "footer" . }}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function updateMenuSlider(slider) {
+        const value = slider.value;
+        const ratingValue = document.getElementById('menu-rating-value');
+        ratingValue.textContent = parseFloat(value).toFixed(1);
+    
+        // Dynamically change the slider's track color
+        const percent = ((value - slider.min) / (slider.max - slider.min)) * 100;
+    
+        slider.style.background = `linear-gradient(to right, red ${percent}%, yellow ${percent}%, green)`;
+    }
+    </script>
+
+<script>
+    document.getElementById('image').addEventListener('change', function(event) {
+        const previewContainer = document.getElementById('image-preview');
+        const previewImg = document.getElementById('preview-img');
+        const fileName = document.getElementById('file-name');
+        const file = event.target.files[0];
+
+        if (file) {
+            // Display file name
+            fileName.textContent = `File name: ${file.name}`;
+            
+            // Display the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewContainer.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            // Hide the preview if no file is selected
+            previewContainer.style.display = 'none';
+        }
+    });
+</script>
+
+    
 </body>
 </html>

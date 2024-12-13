@@ -10,6 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
     <style>
+        .container {
+            margin-bottom: 50px;
+        }
         body {
             background-color: #f9f1e7;
             font-family: 'Poppins', sans-serif;
@@ -42,6 +45,95 @@
         .btn {
             border-radius: 12px;
         }
+        form {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+form h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.8rem;
+    color: #4e3b31;
+    font-weight: 600;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #4e3b31;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+}
+
+.btn-success {
+    background-color: #76c893;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #4caf50;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #495057;
+}
+/* Default slider track */
+.form-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: linear-gradient(to right, red, yellow, green);
+    outline: none;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Slider thumb styling */
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #4e3b31;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Slider thumb styling for Firefox */
+.form-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #4e3b31;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Number markers styling */
+.d-flex span {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #4e3b31;
+}
+
+#rating-value {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #4caf50;
+}
     </style>
 </head>
 <body>
@@ -58,19 +150,39 @@
         {{.error}}
     </div>
     {{end}}
-    <form action="/baristas" method="POST" enctype="multipart/form-data">
+    <form action="/baristas" method="POST" enctype="multipart/form-data" class="p-4 rounded shadow-sm" style="background-color: #fff;">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="Name" required>
+            <input type="text" class="form-control" id="name" name="Name" placeholder="Enter barista's name" required>
         </div>
         <div class="mb-3">
             <label for="experience" class="form-label">Experience (Years)</label>
-            <input type="number" class="form-control" id="experience" name="Experience" required>
+            <input type="number" class="form-control" id="experience" name="Experience" placeholder="e.g., 5" required>
         </div>
         <div class="mb-3">
-            <label for="rating" class="form-label">Rating</label>
-            <input type="number" step="0.1" class="form-control" id="rating" name="Rating" required>
-        </div>
+            <label for="rating-slider" class="form-label">Rating</label>
+            <input 
+                type="range" 
+                class="form-range" 
+                id="rating-slider" 
+                name="Rating" 
+                min="1" 
+                max="5" 
+                step="0.1" 
+                value="3"
+                oninput="updateSlider(this)"
+            >
+            <!-- Number markers -->
+            <div class="d-flex justify-content-between px-1">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
+            <!-- Display selected rating -->
+            <p class="mt-2 text-center">Selected Rating: <span id="rating-value">3.0</span></p>
+        </div>           
         <div class="mb-3">
             <label for="profile_pic" class="form-label">Profile Picture</label>
             <input type="file" class="form-control" id="profile_pic" name="ProfilePic">
@@ -94,7 +206,7 @@
         <div class="mb-3">
             <label for="country" class="form-label">Country</label>
             <select id="country" name="Country" class="form-select" required>
-                <option value="">Select Country</option>
+                <option value="" disabled selected>Select Country</option>
                 <option value="USA">USA</option>
                 <option value="Canada">Canada</option>
                 <option value="UK">UK</option>
@@ -107,11 +219,25 @@
                 <option value="India">India</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Add Barista</button>
-        <a href="/baristas" class="btn btn-secondary">Cancel</a>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success px-4 me-2">Add Barista</button>
+            <a href="/baristas" class="btn btn-secondary px-4">Cancel</a>
+        </div>
     </form>
 </div>
 {{ template "footer" . }}
+<script>
+function updateSlider(slider) {
+    const value = slider.value;
+    const ratingValue = document.getElementById('rating-value');
+    ratingValue.textContent = parseFloat(value).toFixed(1);
+
+    // Dynamically change the slider's track color
+    const percent = ((value - slider.min) / (slider.max - slider.min)) * 100;
+
+    slider.style.background = `linear-gradient(to right, red ${percent}%, yellow ${percent}%, green)`;
+}
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

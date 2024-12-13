@@ -160,7 +160,8 @@ button:hover i {
                     <h5 class="card-title">{{.Name}}</h5>
                     <p class="card-text">
                         <strong>Experience:</strong> {{.Experience}} years<br>
-                        <strong>Rating:</strong> {{printf "%.1f" .Rating}}
+                        <strong>Rating:</strong> {{printf "%.1f" .Rating}} <br>
+                        <strong>Specialty:</strong> {{.Specialty}}
                     </p>
                     <a href="/baristas/{{.ID}}/edit" class="btn btn-warning btn-sm">Edit</a>
                     

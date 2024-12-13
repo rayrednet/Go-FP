@@ -8,5 +8,6 @@ type Barista struct {
     Experience int       `gorm:"not null" form:"experience"`
     ProfilePic string    `gorm:"not null" form:"profile_pic"`
     Rating     float64   `gorm:"not null" form:"rating"`
-    Products   []Product `gorm:"foreignKey:BaristaID"` // Reverse relationship (optional)
+    Specialty  string    `gorm:"not null" form:"specialty"`
+    Products   []Product `gorm:"foreignKey:BaristaID"`
 }

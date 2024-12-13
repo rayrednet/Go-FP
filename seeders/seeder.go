@@ -175,12 +175,18 @@ func SeedBaristas(db *gorm.DB) {
 		"Amelia White", "Alexander Harris", "Mia Clark", "Ethan Lewis", "Harper Robinson",
 	}
 
+	baristaSpecialties := []string{
+		"Latte Art", "Espresso Brewing", "Cold Brew", "Pour Over", "French Press",
+		"Specialty Drinks", "Milk Frothing", "Manual Brewing", "Flavored Coffee", "Coffee Roasting",
+	}
+
 	for i := 0; i < 20; i++ {
 		barista := models.Barista{
 			Name:       baristaNames[rand.Intn(len(baristaNames))],
 			Experience: rand.Intn(11), // Random years of experience (0–10 years)
 			ProfilePic: fmt.Sprintf("https://picsum.photos/seed/%d/200/200", rand.Intn(1000)), // Random image from Picsum
 			Rating:     math.Round((rand.Float64()*4+1)*100) / 100, // Rating between 1.0 and 5.0
+			Specialty:  baristaSpecialties[rand.Intn(len(baristaSpecialties))], // Random specialty
 		}
 
 		if err := db.Create(&barista).Error; err != nil {

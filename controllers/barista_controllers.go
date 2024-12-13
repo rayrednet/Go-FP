@@ -160,6 +160,7 @@ func (bc *BaristaController) CreateBarista(c *gin.Context) {
     if err == nil {
         barista.Rating = rating
     }
+	barista.Specialty = c.PostForm("Specialty")
 
     // Handle profile picture upload
     file, err := c.FormFile("ProfilePic")

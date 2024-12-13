@@ -73,3 +73,18 @@ func CreateReview(c *gin.Context) {
 	// Redirect to the review list
 	c.Redirect(http.StatusFound, "/reviews")
 }
+
+// Delete a review by ID
+func DeleteReview(c *gin.Context) {
+    id := c.Param("id")
+    db := config.GetDB()
+
+    // Delete the review by ID
+    if err := db.Delete(&models.Review{}, id).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete review"})
+        return
+    }
+
+    // Redirect to the reviews list
+    c.Redirect(http.StatusFound, "/reviews")
+}

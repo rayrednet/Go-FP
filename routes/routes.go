@@ -41,4 +41,5 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/reviews", controllers.GetReviews)
 	r.GET("/reviews/create", controllers.NewReview)
 	r.POST("/reviews", controllers.CreateReview)
+	r.POST("/reviews/:id/delete", controllers.DeleteReview)
 }

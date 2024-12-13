@@ -81,6 +81,27 @@
         .form-section button:hover {
             background-color: #a5d6a7; /* Slightly darker green on hover */
         }
+        .form-section .btn-secondary {
+            background-color: #f8c6d2; /* Soft baby pink */
+            color: #4e3b31;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .form-section .btn-secondary:hover {
+            background-color: #e3adb8; /* Slightly darker pink on hover */
+            color: #ffffff;
+        }
+        .form-section .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
         /* Footer */
         footer {
             background-color: #f8c6d2;
@@ -112,26 +133,55 @@
     <div class="form-section">
         <h1>Add a New Review</h1>
         <form action="/reviews" method="POST">
+            <!-- Customer Name -->
             <label for="cust_name">Customer Name:</label>
-            <input type="text" id="cust_name" name="cust_name" required><br>
-
+            <input 
+                type="text" 
+                id="cust_name" 
+                name="cust_name" 
+                placeholder="Enter your full name" 
+                required
+            ><br>
+    
+            <!-- Customer Email -->
             <label for="cust_email">Customer Email:</label>
-            <input type="email" id="cust_email" name="cust_email" required><br>
-
+            <input 
+                type="email" 
+                id="cust_email" 
+                name="cust_email" 
+                placeholder="Enter your email address" 
+                required
+            ><br>
+    
+            <!-- Menu Selection -->
             <label for="product_id">Menu:</label>
-            <select id="product_id" name="product_id" required>
-                <!-- Assuming the list of products will be rendered dynamically -->
+            <select 
+                id="product_id" 
+                name="product_id" 
+                required
+            >
+                <option value="" disabled selected>Select a menu item</option>
                 {{ range .products }}
                 <option value="{{ .ID }}">{{ .Name }}</option>
                 {{ end }}
             </select><br>
-
+    
+            <!-- Review Text -->
             <label for="review">Review:</label>
-            <textarea id="review" name="review" required></textarea><br>
-
-            <button type="submit">Submit</button>
+            <textarea 
+                id="review" 
+                name="review" 
+                placeholder="Write your review here" 
+                required
+            ></textarea><br>
+    
+            <!-- Buttons -->
+            <div class="button-container">
+                <button type="submit">Submit</button>
+                <a href="/reviews" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
-    </div>
+    </div>    
 
     <!-- Footer -->
     {{ template "footer" . }}

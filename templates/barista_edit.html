@@ -44,6 +44,15 @@
             color: #4e3b31;
         }
 
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 600px; /* Optional: Adjust the width to fit your design */
+        }
+
         .btn {
             border-radius: 12px;
         }
@@ -72,6 +81,11 @@
             margin-bottom: 50px;
         }
 
+        .form-control, .form-select {
+            background-color: #ffe4e6; /* Soft pink color */
+        }
+
+
         .current-pic {
             display: block;
             margin-bottom: 1rem;
@@ -81,6 +95,56 @@
             border-radius: 50%;
             border: 2px solid #4e3b31;
         }
+
+        /* Default slider track */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, red, yellow, green);
+            outline: none;
+            transition: background 0.3s ease-in-out;
+        }
+
+        /* Slider thumb styling */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #4e3b31;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /* Slider thumb styling for Firefox */
+        .form-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background-color: #4e3b31;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /* Number markers styling */
+        .d-flex span {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #4e3b31;
+        }
+
+        #rating-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #4caf50;
+        }
+
     </style>
 </head>
 <body>
@@ -88,66 +152,140 @@
 <!-- Navbar -->
 {{ template "navbar" . }}
 
+<div class="header">
+    <h1>Edit Barista</h1>
+</div>
+
 <!-- Edit Barista Form -->
 <div class="container mt-5">
-    <div class="header">
-        <h1>Edit Barista</h1>
+    <div class="form-container">
+        {{if .error}}
+        <div class="alert alert-danger">
+            {{.error}}
+        </div>
+        {{end}}
+        <form action="/baristas/{{.barista.ID}}/update" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="Name" value="{{.barista.Name}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="experience" class="form-label">Experience (Years)</label>
+                <input type="number" class="form-control" id="experience" name="Experience" value="{{.barista.Experience}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="rating-slider" class="form-label">Rating</label>
+                <input 
+                    type="range" 
+                    class="form-range" 
+                    id="rating-slider" 
+                    name="Rating" 
+                    min="1" 
+                    max="5" 
+                    step="0.1" 
+                    value="{{printf "%.1f" .barista.Rating}}"
+                    oninput="updateSlider(this)"
+                >
+                <!-- Number markers -->
+                <div class="d-flex justify-content-between px-1">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+                <!-- Display selected rating -->
+                <p class="mt-2 text-center">Selected Rating: <span id="rating-value">{{printf "%.1f" .barista.Rating}}</span></p>
+            </div>            
+            <div class="mb-3">
+                <label for="specialty" class="form-label">Specialty</label>
+                <input type="text" class="form-control" id="specialty" name="Specialty" value="{{.barista.Specialty}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <select id="country" name="Country" class="form-select" required>
+                    <option value="">Select Country</option>
+                    <option value="USA" {{if eq .barista.Country "USA"}}selected{{end}}>USA</option>
+                    <option value="Canada" {{if eq .barista.Country "Canada"}}selected{{end}}>Canada</option>
+                    <option value="UK" {{if eq .barista.Country "UK"}}selected{{end}}>UK</option>
+                    <option value="Australia" {{if eq .barista.Country "Australia"}}selected{{end}}>Australia</option>
+                    <option value="Italy" {{if eq .barista.Country "Italy"}}selected{{end}}>Italy</option>
+                    <option value="France" {{if eq .barista.Country "France"}}selected{{end}}>France</option>
+                    <option value="Japan" {{if eq .barista.Country "Japan"}}selected{{end}}>Japan</option>
+                    <option value="Brazil" {{if eq .barista.Country "Brazil"}}selected{{end}}>Brazil</option>
+                    <option value="South Korea" {{if eq .barista.Country "South Korea"}}selected{{end}}>South Korea</option>
+                    <option value="India" {{if eq .barista.Country "India"}}selected{{end}}>India</option>
+                </select>
+            </div>      
+            <div class="mb-3">
+                <label for="profile_pic" class="form-label">Current Profile Picture</label>
+                <!-- Display the current profile picture -->
+                <img src="{{.barista.ProfilePic}}" alt="{{.barista.Name}}" class="current-pic">
+            </div>
+            <div class="mb-3">
+                <label for="profile_pic" class="form-label">Update Profile Picture</label>
+                <input 
+                    type="file" 
+                    class="form-control" 
+                    id="profile_pic" 
+                    name="ProfilePic" 
+                    accept="image/*" 
+                    onchange="previewImage(this)"
+                >
+                <small class="form-text text-muted">Leave empty if you don't want to update the profile picture.</small>
+                <!-- Image preview -->
+                <div class="mt-3" id="preview-container" style="display: none;">
+                    <img id="image-preview" src="#" alt="Image Preview" style="max-width: 150px; border: 2px solid #ddd; border-radius: 8px;">
+                    <p class="mt-2"><strong>Selected File:</strong> <span id="file-name"></span></p>
+                </div>
+            </div>                               
+            <button type="submit" class="btn btn-primary">Update Barista</button>
+            <a href="/baristas" class="btn btn-secondary">Cancel</a>
+        </form>
     </div>
-    {{if .error}}
-    <div class="alert alert-danger">
-        {{.error}}
-    </div>
-    {{end}}
-    <form action="/baristas/{{.barista.ID}}/update" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="Name" value="{{.barista.Name}}" required>
-        </div>
-        <div class="mb-3">
-            <label for="experience" class="form-label">Experience (Years)</label>
-            <input type="number" class="form-control" id="experience" name="Experience" value="{{.barista.Experience}}" required>
-        </div>
-        <div class="mb-3">
-            <label for="rating" class="form-label">Rating</label>
-            <input type="number" step="0.1" class="form-control" id="rating" name="Rating" value="{{printf "%.1f" .barista.Rating}}" max="5" required>
-        </div> 
-        <div class="mb-3">
-            <label for="specialty" class="form-label">Specialty</label>
-            <input type="text" class="form-control" id="specialty" name="Specialty" value="{{.barista.Specialty}}" required>
-        </div>
-        <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <select id="country" name="Country" class="form-select" required>
-                <option value="">Select Country</option>
-                <option value="USA" {{if eq .barista.Country "USA"}}selected{{end}}>USA</option>
-                <option value="Canada" {{if eq .barista.Country "Canada"}}selected{{end}}>Canada</option>
-                <option value="UK" {{if eq .barista.Country "UK"}}selected{{end}}>UK</option>
-                <option value="Australia" {{if eq .barista.Country "Australia"}}selected{{end}}>Australia</option>
-                <option value="Italy" {{if eq .barista.Country "Italy"}}selected{{end}}>Italy</option>
-                <option value="France" {{if eq .barista.Country "France"}}selected{{end}}>France</option>
-                <option value="Japan" {{if eq .barista.Country "Japan"}}selected{{end}}>Japan</option>
-                <option value="Brazil" {{if eq .barista.Country "Brazil"}}selected{{end}}>Brazil</option>
-                <option value="South Korea" {{if eq .barista.Country "South Korea"}}selected{{end}}>South Korea</option>
-                <option value="India" {{if eq .barista.Country "India"}}selected{{end}}>India</option>
-            </select>
-        </div>      
-        <div class="mb-3">
-            <label for="profile_pic" class="form-label">Current Profile Picture</label>
-            <!-- Display the current profile picture -->
-            <img src="{{.barista.ProfilePic}}" alt="{{.barista.Name}}" class="current-pic">
-        </div>
-        <div class="mb-3">
-            <label for="profile_pic" class="form-label">Update Profile Picture</label>
-            <input type="file" class="form-control" id="profile_pic" name="ProfilePic">
-            <small class="form-text text-muted">Leave empty if you don't want to update the profile picture.</small>
-        </div>
-        <button type="submit" class="btn btn-primary">Update Barista</button>
-        <a href="/baristas" class="btn btn-secondary">Cancel</a>
-    </form>
 </div>
 
 <!-- Footer -->
 {{ template "footer" . }}
+
+<script>
+    function previewImage(input) {
+        const previewContainer = document.getElementById('preview-container');
+        const fileNameDisplay = document.getElementById('file-name');
+        const imagePreview = document.getElementById('image-preview');
+    
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+    
+            // Create a file reader to read the image
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Set the image preview source and display the container
+                imagePreview.src = e.target.result;
+                previewContainer.style.display = 'block';
+                fileNameDisplay.textContent = file.name;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            // Hide the preview container if no file is selected
+            previewContainer.style.display = 'none';
+        }
+    }
+    </script>
+    
+
+<script>
+    function updateSlider(slider) {
+        const value = slider.value;
+        const ratingValue = document.getElementById('rating-value');
+        ratingValue.textContent = parseFloat(value).toFixed(1);
+    
+        // Dynamically change the slider's track color
+        const percent = ((value - slider.min) / (slider.max - slider.min)) * 100;
+    
+        slider.style.background = `linear-gradient(to right, red ${percent}%, yellow ${percent}%, green)`;
+    }
+    </script>    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -216,13 +216,27 @@
             <!-- Product Name -->
             <div class="form-group">
                 <label for="name" class="form-label">Menu Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Enter the menu item name" 
+                    required
+                >
             </div>
 
             <!-- Description -->
             <div class="form-group">
                 <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" id="description" name="description" required>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="description" 
+                    name="description" 
+                    placeholder="Provide a brief description of the menu item" 
+                    required
+                >
             </div>
 
             <!-- Price -->
@@ -230,7 +244,16 @@
                 <label for="price" class="form-label">Price</label>
                 <div class="input-group">
                     <span class="input-group-text">$</span>
-                    <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        id="price" 
+                        name="price" 
+                        placeholder="Enter the price (e.g., 10.50)" 
+                        step="0.01" 
+                        min="0" 
+                        required
+                    >
                 </div>
             </div>
 
@@ -238,7 +261,7 @@
             <div class="form-group">
                 <label for="category_id" class="form-label">Category</label>
                 <select class="form-control" id="category_id" name="category_id" required>
-                    <option value="" disabled selected>Choose Category</option>
+                    <option value="" disabled selected>Choose a category</option>
                     {{range .categories}}
                         <option value="{{.ID}}">{{.Name}}</option>
                     {{end}}
@@ -248,7 +271,14 @@
             <!-- Available Hour -->
             <div class="form-group">
                 <label for="available_hour" class="form-label">Available Hour</label>
-                <input type="text" class="form-control" id="available_hour" name="available_hour" required>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="available_hour" 
+                    name="available_hour" 
+                    placeholder="Enter the available hours (e.g., 9:00 AM - 9:00 PM)" 
+                    required
+                >
             </div>
 
             <!-- Rating -->
@@ -280,14 +310,21 @@
             <!-- Stock -->
             <div class="form-group">
                 <label for="stock" class="form-label">Stock</label>
-                <input type="number" class="form-control" id="stock" name="stock" required>
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="stock" 
+                    name="stock" 
+                    placeholder="Enter the stock quantity" 
+                    required
+                >
             </div>
 
             <!-- Barista -->
             <div class="form-group">
                 <label for="barista_id" class="form-label">Barista</label>
                 <select class="form-control" id="barista_id" name="barista_id" required>
-                    <option value="" disabled selected>Choose Barista</option>
+                    <option value="" disabled selected>Assign a barista</option>
                     {{range .baristas}}
                         <option value="{{.ID}}">{{.Name}}</option>
                     {{end}}
@@ -297,9 +334,20 @@
             <!-- Image Upload -->
             <div class="form-group">
                 <label for="image" class="form-label">Upload Image</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                <input 
+                    type="file" 
+                    class="form-control" 
+                    id="image" 
+                    name="image" 
+                    accept="image/*" 
+                    placeholder="Choose an image for the menu item" 
+                    required
+                >
                 <div id="image-preview" class="mt-3" style="display: none;">
-                    <img id="preview-img" style="max-width: 100%; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;">
+                    <img 
+                        id="preview-img" 
+                        style="max-width: 100%; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;"
+                    >
                     <p id="file-name" style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;"></p>
                 </div>
             </div>
@@ -307,6 +355,7 @@
         </form>
     </div>
 </div>
+
 
 {{ template "footer" . }}
 

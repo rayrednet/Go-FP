@@ -129,7 +129,23 @@
         <div class="mb-3">
             <label for="specialty" class="form-label">Specialty</label>
             <input type="text" class="form-control" id="specialty" name="Specialty" value="{{.barista.Specialty}}" required>
-        </div>       
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <select id="country" name="Country" class="form-select" required>
+                <option value="">Select Country</option>
+                <option value="USA" {{if eq .barista.Country "USA"}}selected{{end}}>USA</option>
+                <option value="Canada" {{if eq .barista.Country "Canada"}}selected{{end}}>Canada</option>
+                <option value="UK" {{if eq .barista.Country "UK"}}selected{{end}}>UK</option>
+                <option value="Australia" {{if eq .barista.Country "Australia"}}selected{{end}}>Australia</option>
+                <option value="Italy" {{if eq .barista.Country "Italy"}}selected{{end}}>Italy</option>
+                <option value="France" {{if eq .barista.Country "France"}}selected{{end}}>France</option>
+                <option value="Japan" {{if eq .barista.Country "Japan"}}selected{{end}}>Japan</option>
+                <option value="Brazil" {{if eq .barista.Country "Brazil"}}selected{{end}}>Brazil</option>
+                <option value="South Korea" {{if eq .barista.Country "South Korea"}}selected{{end}}>South Korea</option>
+                <option value="India" {{if eq .barista.Country "India"}}selected{{end}}>India</option>
+            </select>
+        </div>      
         <div class="mb-3">
             <label for="profile_pic" class="form-label">Current Profile Picture</label>
             <!-- Display the current profile picture -->

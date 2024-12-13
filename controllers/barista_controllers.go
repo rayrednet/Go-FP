@@ -100,6 +100,8 @@ func (bc *BaristaController) UpdateBarista(c *gin.Context) {
 		Name       string `form:"Name"`
 		Experience int    `form:"Experience"`
 		Rating     float64 `form:"Rating"`
+		Specialty  string `form:"Specialty"`
+		Country    string `form:"Country"`
 	}
 
 	if err := c.ShouldBind(&form); err != nil {
@@ -114,6 +116,8 @@ func (bc *BaristaController) UpdateBarista(c *gin.Context) {
 	barista.Name = form.Name
 	barista.Experience = form.Experience
 	barista.Rating = form.Rating
+	barista.Specialty = form.Specialty
+	barista.Country = form.Country
 
 	// Handle profile picture update
 	file, err := c.FormFile("ProfilePic")
@@ -161,6 +165,7 @@ func (bc *BaristaController) CreateBarista(c *gin.Context) {
         barista.Rating = rating
     }
 	barista.Specialty = c.PostForm("Specialty")
+	barista.Country = c.PostForm("Country")
 
     // Handle profile picture upload
     file, err := c.FormFile("ProfilePic")

@@ -180,6 +180,11 @@ func SeedBaristas(db *gorm.DB) {
 		"Specialty Drinks", "Milk Frothing", "Manual Brewing", "Flavored Coffee", "Coffee Roasting",
 	}
 
+	baristaCountries := []string{
+		"USA", "Canada", "UK", "Australia", "Italy",
+		"France", "Japan", "Brazil", "South Korea", "India",
+	}
+
 	for i := 0; i < 20; i++ {
 		barista := models.Barista{
 			Name:       baristaNames[rand.Intn(len(baristaNames))],
@@ -187,6 +192,7 @@ func SeedBaristas(db *gorm.DB) {
 			ProfilePic: fmt.Sprintf("https://picsum.photos/seed/%d/200/200", rand.Intn(1000)), // Random image from Picsum
 			Rating:     math.Round((rand.Float64()*4+1)*100) / 100, // Rating between 1.0 and 5.0
 			Specialty:  baristaSpecialties[rand.Intn(len(baristaSpecialties))], // Random specialty
+			Country:    baristaCountries[rand.Intn(len(baristaCountries))], // Random country
 		}
 
 		if err := db.Create(&barista).Error; err != nil {

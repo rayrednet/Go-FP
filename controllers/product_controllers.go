@@ -10,14 +10,26 @@ import (
 
 func GetProducts(c *gin.Context) {
 	var products []models.Product
-	if err := db.Preload("Category").Preload("Barista").Find(&products).Error; err != nil {
+	sortOrder := c.DefaultQuery("sort", "newest") // Default to "newest"
+
+	query := db.Preload("Category").Preload("Barista")
+	if sortOrder == "oldest" {
+		query = query.Order("created_at ASC")
+	} else {
+		query = query.Order("created_at DESC")
+	}
+
+	if err := query.Find(&products).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
 	c.HTML(http.StatusOK, "product_index.html", gin.H{
 		"products": products,
+		"sort":     sortOrder,
 	})
 }
+
 
 func NewProduct(c *gin.Context) {
 	var categories []models.Category

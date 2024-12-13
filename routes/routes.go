@@ -26,6 +26,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.POST("/products/:id/update", controllers.UpdateProduct)
 	r.POST("/products/:id/delete", controllers.DeleteProduct)
 	r.GET("/products/:id", controllers.ShowProduct)
+	
 
 	// Barista routes
 	db := config.GetDB()

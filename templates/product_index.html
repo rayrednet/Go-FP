@@ -260,6 +260,14 @@
     <p>Explore our delightful offerings and savor every moment!</p>
 </div>
 
+<form method="GET" action="/products" class="d-inline-block">
+    <label for="sort" class="me-2">Sort by:</label>
+    <select name="sort" id="sort" class="form-select d-inline-block w-auto" onchange="this.form.submit()">
+        <option value="newest" {{ if eq .sort "newest" }}selected{{ end }}>Newest</option>
+        <option value="oldest" {{ if eq .sort "oldest" }}selected{{ end }}>Oldest</option>
+    </select>
+</form>
+
 <div class="text-center">
   <a href="/products/create" class="btn btn-add">Add New Menu</a>
 </div>

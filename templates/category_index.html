@@ -159,8 +159,7 @@
     <div class="d-flex justify-content-center mb-4">
         <form action="/categories" method="GET" class="d-flex align-items-center">
             <label for="sortBy" class="me-2 fw-semibold" style="font-size: 1.2rem; color: #4e3b31;">Sort By:</label>
-            <select id="sortBy" name="sort" class="form-select shadow-sm" onchange="this.form.submit()" style="width: 200px; background-color: #fff9f4; border-color: #f8c6d2; color: #4e3b31; text-align: center;">
-                <option value="" {{ if eq .sort "" }}selected{{ end }}>Select</option>
+            <select id="sortBy" name="sort" class="form-select shadow-sm" onchange="this.form.submit()" style="width: 200px; background-color: #fff9f4; border-color: #f8c6d2; color: #4e3b31;">
                 <option value="newest" {{ if eq .sort "newest" }}selected{{ end }}>Newest</option>
                 <option value="oldest" {{ if eq .sort "oldest" }}selected{{ end }}>Oldest</option>
             </select>

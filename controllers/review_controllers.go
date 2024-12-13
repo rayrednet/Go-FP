@@ -8,19 +8,29 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Display all reviews
 func GetReviews(c *gin.Context) {
 	var reviews []models.Review
 	db := config.GetDB()
 
-	// Preload Product to include related product data
-	if err := db.Preload("Product").Find(&reviews).Error; err != nil {
+	// Get the sort query parameter
+	sort := c.Query("sort")
+
+	// Set the default order
+	order := "created_at desc"
+	if sort == "oldest" {
+		order = "created_at asc"
+	}
+
+	// Fetch reviews with sorting
+	if err := db.Preload("Product").Order(order).Find(&reviews).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
+	// Pass the reviews and current sort option to the template
 	c.HTML(http.StatusOK, "review_index.html", gin.H{
 		"reviews": reviews,
+		"sort":    sort,
 	})
 }
 

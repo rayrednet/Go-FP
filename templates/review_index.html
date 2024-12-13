@@ -101,6 +101,22 @@
         <h1>Scarlett's Customer Reviews</h1>
         <p>See what our customers have to say about their experiences with us!</p>
     </div>
+    
+    <!-- Sort Filter -->
+    <div class="d-flex justify-content-end mb-3">
+        <form action="/reviews" method="GET" class="d-flex">
+            <select name="sort" class="form-select me-2" onchange="this.form.submit()">
+                <option value="" {{ if eq .sort "" }}selected{{ end }}>Sort By</option>
+                <option value="newest" {{ if eq .sort "newest" }}selected{{ end }}>Newest</option>
+                <option value="oldest" {{ if eq .sort "oldest" }}selected{{ end }}>Oldest</option>
+            </select>
+            <noscript>
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </noscript>
+        </form>
+    </div>
+
+    
 
     <a href="/reviews/create" class="add-review-btn btn btn-success d-block mx-auto" style="width: 200px;">Add New Review</a>
 

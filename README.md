@@ -1,129 +1,150 @@
-# 🌟 Final Project Go - Scarlett's Cafe
+# 🌟 Final Project Go - Scarlett's Cafe  
 
-## 📝 Group Information
-- *Group Number:* 9
-- *Class:* Pemrograman Berbasis Kerangka Kerja (D)
+## 📝 Group Information  
+- *Group Number:* 9  
+- *Class:* Pemrograman Berbasis Kerangka Kerja (D)  
 
-## 👥 Group Members
+## 👥 Group Members  
 
-| Name                       | NRP         |
-|----------------------------|-------------|
-| Helsa Sriprameswari Putri  | 5025221154  |
-| Rayssa Ravelia             | 5025211219  |
+| Name                       | NRP         |  
+|----------------------------|-------------|  
+| Helsa Sriprameswari Putri  | 5025221154  |  
+| Rayssa Ravelia             | 5025211219  |  
 
-## Tech Stack
-1. Language: GoLang
-2. Framework: Gin
-3. Database: MySQL
-4. ORM: GORM
+## 🌍 Project Overview  
+For our final project in the Go framework course, we developed a website called **Scarlett's Cafe**, a cafe catalog. This website serves as an **ADMIN** role platform, allowing full **create, read, update, and delete (CRUD)** operations for every model. We chose a pink, girly theme to represent the cafe's branding.  
 
-## Installation
-1. Clone this project for GitHub
-```
-https://github.com/rayrednet/Go-FP
-```
+## 📽️ Demo Video  
+Below is the demo video showcasing the key functionalities of this project:  
+[Watch the demo video here](https://youtu.be/yO-bhszipl0)  
 
-2. Navigate to the directory
-```
-cd Go-Fp
-```
-3. Install project dependencies
-```
-go mod tidy
-```
-4. Setup my SQL and use your own username and password on .env
-```
-DB_USER=yourusername
-DB_PASSWORD=yourpassword
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_NAME=fp_pbkk
-```
+## 💻 Tech Stack  
+1. **Language:** GoLang  
+2. **Framework:** Gin  
+3. **Database:** MySQL  
+4. **ORM:** GORM  
 
-5. Create database fp_pbkk on mySQL
-```
-CREATE DATABASE fp_pbkk;
-```
+## ⚙️ Installation  
+1. Clone this project from GitHub:  
+   ```bash  
+   https://github.com/rayrednet/Go-FP  
+   ```  
 
-6. Run this project
-```
-go run .
-```
-After this, you should see your project running on http://localhost:8080/
+2. Navigate to the directory:  
+   ```bash  
+   cd Go-FP  
+   ```  
 
-# Web App Features
+3. Install project dependencies:  
+   ```bash  
+   go mod tidy  
+   ```  
 
-1. User can create new menu for Scarlett's Cafe.
-2. User can update an existing menu.
-3. User can delete a desired menu.
-4. User can add categories for the menu.
-5. User can update an existing category.
-6. User can delete a category.
-7. User can view and add a new review
-8. User can add a new barista.
-9. User can update and delete barista.
+4. Setup MySQL and configure your username and password in `.env`:  
+   ```env  
+   DB_USER=yourusername  
+   DB_PASSWORD=yourpassword  
+   DB_HOST=127.0.0.1  
+   DB_PORT=3306  
+   DB_NAME=fp_pbkk  
+   ```  
 
-# Table Structures
-![image](https://github.com/user-attachments/assets/33186796-38f8-4a03-8dcc-deb3354ac259)
+5. Create the `fp_pbkk` database in MySQL:  
+   ```sql  
+   CREATE DATABASE fp_pbkk;  
+   ```  
 
+6. Run the project:  
+   ```bash  
+   go run main.go  
+   ```  
+   After this, your project should be running at [http://localhost:8080](http://localhost:8080).  
 
-## Overview
+## 🛠️ Web App Features  
 
-### Home Page
-![image](https://github.com/user-attachments/assets/f6eaf8ac-d701-436f-83b3-a105db1c39b4)
-![image](https://github.com/user-attachments/assets/f91ab7c0-f578-4779-8280-aa628329b945)
-![image](https://github.com/user-attachments/assets/51881c66-4c5e-49a8-ba3e-69823b0dbd6a)
+1. Create, update, and delete menus.  
+2. Create, update, and delete menu categories.  
+3. Add, update, and delete baristas.  
+4. Create, update, and delete reviews.  
 
+## 📊 Conceptual Data Model  
+![Conceptual Data Model](https://github.com/user-attachments/assets/33186796-38f8-4a03-8dcc-deb3354ac259)  
 
-## Menu Page
-![image](https://github.com/user-attachments/assets/06a06708-dd20-45c7-bba6-c96de7eac2c6)
+## 🖼️ Web Pages Screenshot  
+
+### 1️⃣ Homepage  
+![homepage](img/home.png)
 
 
-## Add Menu
-![image](https://github.com/user-attachments/assets/7e429d01-d07c-4529-92d9-ca71e7229330)
+### 2️⃣ Category Section  
+- **Index Page:** Shows all available categories. 
+![category-index](img/category-index.png)
 
+- **Create Page:** Allows admins to add a new category. 
+![create-page](img/category-create.png)
+![create-page](img/category-create-after.png)
 
-## Detail Menu 
-![image](https://github.com/user-attachments/assets/c2ddf904-4f94-4179-9f92-f14eadfc04d8)
+- **Delete:** Removes an unwanted category.  
+![delete](img/category-delete.png)
+![delete](img/category-delete-after.png)
 
+- **Update Page:** Enables editing of a category.  
+![update-page](img/category-edit-before.png)
+![update-page](img/category-edit.png)
+![update-page](img/category-edit-after.png)
 
-## Delete Menu
-![image](https://github.com/user-attachments/assets/cfa5d60d-6d15-4782-9379-3cada8d27988)
+### 3️⃣ Menu Section  
+- **Index Page:** Lists all menu items.  
+![menu-index](img/menu/index.png)
+![menu-index](img/menu/detail.png)
 
-## Edit Menu
-![image](https://github.com/user-attachments/assets/6429fce6-d65b-4e85-ac9c-b258ae5278e6)
+- **Create Page:** Adds a new menu item.  
+![create-page](img/menu/create-form.png)
+![create-page](img/menu/create-form-filled.png)
+![create-page](img/menu/create-after.png)
 
+- **Delete:** Deletes a specific menu item.  
+![delete](img/menu/delete.png)
+![delete](img/menu/delete-after.png)
 
-## Category Page
-![image](https://github.com/user-attachments/assets/168ae106-27eb-46e4-8dfd-0747fb5ded58)
+- **Update Page:** Updates details of a menu item.  
+![update-page](img/menu/edit-before.png)
+![update-page](img/menu/edit.png)
+![update-page](img/menu/edit-after.png)
+![update-page](img/menu/edit-after-v2.png)
 
+### 4️⃣ Barista Section  
+- **Index Page:** Lists all baristas. 
+![index](img/barista/index.png)
 
-## Add New Category
-![image](https://github.com/user-attachments/assets/387c5f2a-54d9-4671-8983-5544facfcb37)
+- **Create Page:** Adds a new barista.  
+![create-page](img/barista/create-form.png)
+![create-page](img/barista/create-form-filled.png)
+![create-page](img/barista/create-after.png)
 
-## Edit Category
-![image](https://github.com/user-attachments/assets/c1522b13-2248-47ca-b54c-b260b498da86)
+- **Delete:** Removes a barista. 
+ ![delete](img/barista/delete.png)
+![delete](img/barista/delete-after.png)
 
+- **Update Page:** Updates barista details.  
+![update-page](img/barista/edit-before.png)
+![update-page](img/barista/edit.png)
+![update-page](img/barista/edit-after.png)
 
+### 5️⃣ Review Section  
+- **Index Page:** Lists all reviews.  
+![index](img/review/index.png)
 
+- **Create Page:** Adds a new review.  
+![create-page](img/review/create-form.png)
+![create-page](img/review/create-form-filled.png)
+![create-page](img/review/create-after.png)
 
-## Review Page
-![image](https://github.com/user-attachments/assets/76ad8727-94e4-46f9-b3fe-e24abbc8e08d)
+- **Delete:** Removes a review.  
+![delete](img/review/delete.png)
+![delete](img/review/delete-after.png)
 
-
-## Add Review
-![image](https://github.com/user-attachments/assets/69b7dff4-5e41-4d6a-bbbc-cd55393052b8)
-
-## Barista Page
-![image](https://github.com/user-attachments/assets/b39e715e-4bbe-42db-a306-bad0f832b281)
-
-
-## Add Barista 
-![image](https://github.com/user-attachments/assets/4b999c40-e56e-4b5a-b61a-24ab382c2c61)
-
-
-## Edit Barista
-![image](https://github.com/user-attachments/assets/f29e3cf7-d270-442b-98c8-3a72fa16cbc9)
-
-## Youtube Link
-https://youtu.be/x8l-G5t8gPk
+- **Update Page:** Updates review details.  
+![update-page](img/review/edit-before.png)
+![update-page](img/review/edit.png)
+![update-page](img/review/edit-after.png)

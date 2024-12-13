@@ -18,14 +18,14 @@
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: #ffffff; /* White background for the form */
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
-        }
+        .review-container {
+    width: 80%; /* Set width to 80% of the page */
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
         h1 {
             font-size: 2rem;
@@ -104,13 +104,17 @@
         .mt-3 {
             margin-top: 1rem;
         }
+        
     </style>
 </head>
 <body>
     {{ template "navbar" . }}
-
-    <div class="container">
+    
+    <div class="header">
         <h1>Edit Review</h1>
+    </div>
+
+    <div class="review-container">
         <form action="/reviews/{{ .review.ID }}/update" method="POST">
             <div class="mb-3">
                 <label for="cust_name">Customer Name</label>

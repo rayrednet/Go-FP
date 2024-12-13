@@ -9,6 +9,6 @@ type Barista struct {
     ProfilePic string    `gorm:"not null" form:"profile_pic"`
     Rating     float64   `gorm:"not null" form:"rating"`
     Specialty  string    `gorm:"not null" form:"specialty"`
-    Country    string    `gorm:"not null" form:"country"` // New field for Country
+    Country    string    `gorm:"not null" form:"country"`
     Products   []Product `gorm:"foreignKey:BaristaID"`
 }

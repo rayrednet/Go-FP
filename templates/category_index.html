@@ -52,6 +52,7 @@
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .card:hover {
@@ -66,6 +67,18 @@
 
         .card-body {
             color: #4e3b31;
+            position: relative;
+            padding-bottom: 60px; /* space for buttons */
+        }
+
+        /* Make the card title bold */
+        .card-title {
+            font-weight: 700; /* bolder title */
+        }
+
+        /* Make the description text smaller */
+        .card-text {
+            font-size: 0.9rem; /* smaller font for description */
         }
 
         footer {
@@ -85,6 +98,50 @@
 
         footer a:hover {
             color: #d07852;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            text-decoration: none;
+            color: #4e3b31;
+            transition: background-color 0.3s;
+        }
+
+        .btn-edit {
+            background-color: #ffe0b2;
+        }
+
+        .btn-edit:hover {
+            background-color: #ffcc80;
+        }
+
+        .btn-delete {
+            background-color: #f8bbd0;
+        }
+
+        .btn-delete:hover {
+            background-color: #f48fb1;
+        }
+
+        .btn-edit:focus,
+        .btn-delete:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .btn-container {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            display: flex;
+            gap: 8px;
         }
     </style>
 </head>
@@ -132,10 +189,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{.Name}}</h5>
                         <p class="card-text">{{.Description}}</p>
-                        <a href="/categories/{{.ID}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="/categories/{{.ID}}/delete" method="POST" style="display:inline;">
-                            <button type="button" class="btn btn-danger btn-sm" onclick="showDeleteModal(event, this.closest('form'), '{{ .Name }}')">Delete</button>
-                        </form>
+                        <div class="btn-container">
+                            <a href="/categories/{{.ID}}/edit" class="btn-edit" title="Edit">Edit</a>
+                            <form action="/categories/{{.ID}}/delete" method="POST" style="margin:0;">
+                                <button type="button" class="btn-delete" onclick="showDeleteModal(event, this.closest('form'), '{{ .Name }}')" title="Delete">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

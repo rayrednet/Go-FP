@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
     <style>
+        /* Add styles here */
         body {
             background-color: #f9f1e7; /* Pastel cream background */
             font-family: 'Poppins', sans-serif; /* Aesthetic font for body */
@@ -17,148 +18,92 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        /* Navbar */
-        .navbar {
-            background-color: #f8c6d2; /* Soft baby pink */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #4e3b31;
-            font-family: 'Quicksand', sans-serif; /* Font for the brand name */
-        }
-        .nav-link {
-            color: #4e3b31;
-            font-weight: 500;
-        }
-        .nav-link:hover {
-            color: #d07852; /* Soft brown-orange */
-        }
-        /* Reviews Section */
+
         .header {
             text-align: center;
-            padding: 1rem 0; /* Reduced padding to bring it closer */
+            padding: 1rem 0;
             color: #333;
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
         }
+
         .header h1 {
             font-size: 2.5rem;
             font-weight: bold;
             font-family: 'Quicksand', sans-serif;
             color: #4e3b31;
             margin-bottom: 0.5rem;
-            margin-top : 1 rem;
         }
+
         .reviews-list {
-            list-style: none; /* Remove list bullets */
+            list-style: none;
             padding-left: 0;
         }
+
         .reviews-list li {
-            background-color: #fff8f1; /* Soft pastel beige */
+            background-color: #fff8f1;
             margin: 1.2rem 0;
             padding: 1.5rem;
             border-radius: 10px;
-            border: 1px solid #e0c9a6; /* Light border */
-            width: 80%; /* Shortened border width */
+            border: 1px solid #e0c9a6;
+            width: 80%;
             margin-left: auto;
             margin-right: auto;
-            transition: all 0.3s ease; /* Smooth transition for hover effect */
+            transition: all 0.3s ease;
         }
+
         .reviews-list li:hover {
-            background-color: #f8d9e1; /* Soft pink background on hover */
-            transform: scale(1.02); /* Slightly scale up on hover */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
-        }
-        .reviews-list li strong {
-            font-size: 1.1rem;
-            color: #d07852; /* Soft brown-orange */
-        }
-        .reviews-list li .product-name {
-            font-weight: 600;
-            color: #4e3b31;
-        }
-        .reviews-list li .review {
-            color: #555;
-            font-size: 0.95rem;
+            background-color: #f8d9e1;
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .reviews-list li .rating {
-            color: #555;
-            font-size: 0.95rem;
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
         }
-        .add-review-btn {
-            background-color: #c8e6c9; /* Light pastel green */
+
+        .btn-edit {
+            background-color: #ffe0b2;
             color: #4e3b31;
-            font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            border-radius: 5px;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 10px; /* Reduced margin to bring it closer */
-            width: auto;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
+            transition: background-color 0.3s;
         }
-        .add-review-btn:hover {
-            background-color: #a5d6a7;
+
+        .btn-edit:hover {
+            background-color: #ffcc80;
+            color: white;
         }
-        .btn-danger {
-    background-color: #f8bbd0; /* Light pink */
-    color: #4e3b31; /* Warm brown */
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.85rem;
-    cursor: pointer;
-}
 
-.btn-danger:hover {
-    background-color: #f48fb1; /* Darker pink on hover */
-    color: white;
-}
-.reviews-list li {
-    position: relative; /* Make the card position relative for absolute positioning */
-    padding-bottom: 50px; /* Add extra padding to make space for the button */
-}
+        .btn-delete {
+            background-color: #f8bbd0;
+            color: #4e3b31;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
 
-.delete-container {
-    position: absolute;
-    bottom: 10px;
-    right: 10px; /* Place the button in the bottom-right corner */
-}
-
-.btn-delete {
-    background-color: #f8bbd0; /* Light pink */
-    color: #4e3b31; /* Warm brown */
-    border: none;
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-delete:hover {
-    background-color: #f48fb1; /* Darker pink */
-    color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
-}
-
+        .btn-delete:hover {
+            background-color: #f48fb1;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     {{ template "navbar" . }}
 
-    <!-- Reviews Section -->
-   <!-- Header -->
-<div class="header">
-    <h1>Scarlett's Customer Reviews</h1>
-    <p>See what our customers have to say about their experiences with us!</p>
-</div>
-    <a href="/reviews/create" class="add-review-btn">Add New Review</a>
+    <div class="header">
+        <h1>Scarlett's Customer Reviews</h1>
+        <p>See what our customers have to say about their experiences with us!</p>
+    </div>
+
+    <a href="/reviews/create" class="add-review-btn btn btn-success d-block mx-auto" style="width: 200px;">Add New Review</a>
+
     <ul class="reviews-list">
         {{ range .reviews }}
         <li>
@@ -167,19 +112,21 @@
             Review: <span class="review">{{ .Review }}</span><br>
             Rating: <span class="rating">{{ .Product.Rating }}</span>
             
-            <!-- Delete Button -->
-            <div class="delete-container">
+            <div class="action-buttons">
+                <a href="/reviews/{{ .ID }}/edit" class="btn-edit">Edit</a>
                 <form action="/reviews/{{ .ID }}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this review?')">
                     <button type="submit" class="btn-delete">Delete</button>
                 </form>
             </div>
         </li>
+        {{ else }}
+        <li class="text-center">
+            <strong>No reviews found.</strong>
+        </li>
         {{ end }}
-    </ul>    
+    </ul>
 
-    <!-- Footer -->
     {{ template "footer" . }}
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>

@@ -88,3 +88,80 @@ func DeleteReview(c *gin.Context) {
     // Redirect to the reviews list
     c.Redirect(http.StatusFound, "/reviews")
 }
+
+// Fetch the review data and render the edit form
+func EditReview(c *gin.Context) {
+    id := c.Param("id")
+    var review models.Review
+    db := config.GetDB()
+
+    // Find the review by ID
+    if err := db.Preload("Product").First(&review, id).Error; err != nil {
+        c.HTML(http.StatusNotFound, "error.html", gin.H{
+            "error": "Review not found",
+        })
+        return
+    }
+
+    var products []models.Product
+    if err := db.Find(&products).Error; err != nil {
+        c.HTML(http.StatusInternalServerError, "error.html", gin.H{
+            "error": "Failed to fetch products",
+        })
+        return
+    }
+
+    // Render the edit form
+    c.HTML(http.StatusOK, "review_edit.html", gin.H{
+        "review":   review,
+        "products": products,
+    })
+}
+
+// Handle review updates
+func UpdateReview(c *gin.Context) {
+    id := c.Param("id")
+    var review models.Review
+    db := config.GetDB()
+
+    // Find the review by ID
+    if err := db.First(&review, id).Error; err != nil {
+        c.HTML(http.StatusNotFound, "error.html", gin.H{
+            "error": "Review not found",
+        })
+        return
+    }
+
+    // Parse updated data from form
+    var input struct {
+        CustName  string `form:"cust_name" binding:"required"`
+        CustEmail string `form:"cust_email" binding:"required,email"`
+        Review    string `form:"review" binding:"required"`
+        ProductID uint   `form:"product_id" binding:"required"`
+    }
+
+    if err := c.ShouldBind(&input); err != nil {
+        c.HTML(http.StatusBadRequest, "review_edit.html", gin.H{
+            "error":   "Invalid form data",
+            "review":  review,
+            "products": nil,
+        })
+        return
+    }
+
+    // Update the review
+    review.CustName = input.CustName
+    review.CustEmail = input.CustEmail
+    review.Review = input.Review
+    review.ProductID = input.ProductID
+
+    if err := db.Save(&review).Error; err != nil {
+        c.HTML(http.StatusInternalServerError, "error.html", gin.H{
+            "error": "Failed to update review",
+        })
+        return
+    }
+
+    // Redirect to reviews page
+    c.Redirect(http.StatusFound, "/reviews")
+}

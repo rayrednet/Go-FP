@@ -203,43 +203,47 @@
             font-weight: 600;
         }
         .btn-group {
-            margin-top: auto;
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-        }
+    position: absolute;
+    bottom: 16px; /* Adjust distance from the bottom of the card */
+    right: 16px; /* Adjust distance from the right of the card */
+    display: flex;
+    gap: 8px; /* Space between buttons */
+}
+
         .btn-group a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #c8e6c9;
-            color: #4e3b31;
-            transition: background-color 0.3s;
-        }
-        .btn-group a:hover {
-            background-color: #a5d6a7;
-        }
-        .btn-group a.btn-edit {
-            background-color: #ffe0b2;
-        }
-        .btn-group a.btn-edit:hover {
-            background-color: #ffcc80;
-        }
-        .btn-group a.btn-detail {
-            background-color: #bbdefb;
-        }
-        .btn-group a.btn-detail:hover {
-            background-color: #90caf9;
-        }
-        .btn-group a.btn-delete {
-            background-color: #f8bbd0;
-        }
-        .btn-group a.btn-delete:hover {
-            background-color: #f48fb1;
-        }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px; /* Adjust padding for rounded rectangle shape */
+    border-radius: 12px; /* Rounded rectangle corners */
+    background-color: #c8e6c9;
+    color: #4e3b31;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Remove underline */
+    font-size: 0.9rem; /* Ensure text is readable */
+    font-weight: 600; /* Make the text bold */
+}
+
+.btn-group a:hover {
+    background-color: #a5d6a7;
+}
+
+.btn-group a.btn-edit {
+    background-color: #ffe0b2;
+}
+
+.btn-group a.btn-edit:hover {
+    background-color: #ffcc80;
+}
+
+.btn-group a.btn-delete {
+    background-color: #f8bbd0;
+}
+
+.btn-group a.btn-delete:hover {
+    background-color: #f48fb1;
+}
+
         .no-menu-card {
             height: 100px;
             display: flex;
@@ -304,14 +308,15 @@
                     <p class="card-text price"><strong>Price:</strong> ${{.Price}}</p>
                     <div class="btn-group">
                         <a href="/products/{{.ID}}/edit" class="btn-edit" title="Edit">
-                            <i data-lucide="edit"></i>
+                            Edit
                         </a>
                         <form action="/products/{{.ID}}/delete" method="POST" style="display:inline;" onsubmit="confirmDelete(event)">
-                            <button type="submit" class="btn-delete" title="Delete">
-                                <i data-lucide="trash-2"></i>
-                            </button>
+                            <a href="#" class="btn-delete" title="Delete" onclick="this.closest('form').submit(); return false;">
+                                Delete
+                            </a>
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>

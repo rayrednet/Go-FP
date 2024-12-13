@@ -22,18 +22,28 @@ func NewBaristaController(db *gorm.DB) *BaristaController {
 // GetAllBaristas fetches all baristas and displays them in an HTML template
 func (bc *BaristaController) GetAllBaristas(c *gin.Context) {
 	var baristas []models.Barista
+	sort := c.Query("sort") // Get the sort query parameter
 
-	// Fetch all baristas from the database
-	if err := bc.DB.Find(&baristas).Error; err != nil {
+	// Apply sorting logic
+	query := bc.DB
+	if sort == "newest" {
+		query = query.Order("created_at DESC") // Sort by newest
+	} else if sort == "oldest" {
+		query = query.Order("created_at ASC") // Sort by oldest
+	}
+
+	// Fetch the baristas from the database
+	if err := query.Find(&baristas).Error; err != nil {
 		c.HTML(http.StatusInternalServerError, "error.html", gin.H{
 			"error": "Failed to fetch baristas",
 		})
 		return
 	}
 
-	// Pass the baristas to the HTML template
+	// Pass the sorted baristas and the sort parameter to the HTML template
 	c.HTML(http.StatusOK, "barista_index.html", gin.H{
 		"baristas": baristas,
+		"sort":     sort, // Include the current sort parameter for UI state
 	})
 }
 

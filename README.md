@@ -69,8 +69,12 @@ Below is the demo video showcasing the key functionalities of this project:
 3. Add, update, and delete baristas.  
 4. Add, update, and delete reviews.  
 
-## 📊 Conceptual Data Model  
-![Conceptual Data Model](https://github.com/user-attachments/assets/33186796-38f8-4a03-8dcc-deb3354ac259)  
+## 📊 Data Models  
+1. **Conceptual Data Model**  
+   ![Conceptual Data Model](img/cdm.png)
+
+2. **Physical Data Model**  
+   ![Physical Data Model](img/pdm.png)
 
 ## 🖼️ Web Pages Screenshot  
 
